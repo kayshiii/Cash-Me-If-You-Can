@@ -1,43 +1,43 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class FadingScript : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private float fadeDuration = 5.0f;
-    [SerializeField] private bool fadeInOnStart = false;
+    public Image fadeImage; // Assign your black UI Image here in the Inspector
+    public float fadeDuration = 1f; // 1 second fade
+    public float holdDuration = 5f; // 5 seconds on screen
+    //public string nextSceneName = "GameProperScene"; // Set your next scene here
 
-
-    private void Start()
+    void Start()
     {
-        if (fadeInOnStart)
-        {
-            StartFadeIn();
-        }
-        else
-        {
-            StartFadeOut();
-        }
-    }
-    public void StartFadeIn()
-    {
-        StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 0, fadeDuration));
+        StartCoroutine(PlayIntroSequence());
     }
 
-    public void StartFadeOut()
+    IEnumerator PlayIntroSequence()
     {
-        StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 1, fadeDuration));
+        // Fade in
+        yield return StartCoroutine(Fade(1, 0, fadeDuration));
+        // Hold
+        yield return new WaitForSeconds(holdDuration);
+        // Fade out
+        yield return StartCoroutine(Fade(0, 1, fadeDuration));
+        // Load next scene
+        SceneManager.LoadScene("Home Screen");
     }
 
-    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
+    IEnumerator Fade(float startAlpha, float endAlpha, float duration)
     {
-        float elapsed = 0.0f;
-        while (elapsed < fadeDuration)
+        float time = 0;
+        Color color = fadeImage.color;
+        while (time < duration)
         {
-            elapsed += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(start, end, elapsed / duration);
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, time / duration);
+            fadeImage.color = new Color(color.r, color.g, color.b, alpha);
+            time += Time.deltaTime;
             yield return null;
         }
-        cg.alpha = end;
+        fadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
     }
 }
