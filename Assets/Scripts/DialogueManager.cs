@@ -23,6 +23,8 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool skipTypewriter = false;
 
+    public TutorialSliders tutorialSliders;
+
     void Update()
     {
         // If typing, and space is pressed, complete instantly
@@ -47,6 +49,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(lineDelay);
             currentIndex++;
         }
+
+        tutorialSliders.StartBudgetTutorial();
     }
 
     IEnumerator TypeLine(string line)
