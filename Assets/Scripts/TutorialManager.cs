@@ -7,8 +7,8 @@ public class TutorialIntroManager : MonoBehaviour
 {
     public CanvasGroup introGroup; // Add CanvasGroup to IntroPanel and assign
     public GameObject dialoguePanel; // Dialogue box UI panel
-    public float introDuration = 2.5f;
-    public float fadeDuration = 1f;
+    public float introDuration = 2f;
+    public float fadeDuration = 2f;
 
     public DialogueManager dialogueManager;
 

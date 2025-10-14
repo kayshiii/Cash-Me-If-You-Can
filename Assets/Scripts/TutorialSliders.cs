@@ -13,6 +13,10 @@ public class TutorialSliders : MonoBehaviour
     public GameObject dailyNeedsInfo;
     public GameObject lakwatsaSlider;
     public GameObject lakwatsaInfo;
+    public GameObject confirmButton;
+
+    private bool skipTypewriter = false;
+    private bool isTypingInfo = false;
 
     public float delayBetweenReveals = 3.5f;
 
@@ -28,6 +32,14 @@ public class TutorialSliders : MonoBehaviour
     public TextMeshProUGUI lakwatsaInfoText;
     public string lakwatsaExplanation = "Well this is everyone's favorite slider, you allocate your budget for your personal consumption and lakwatsa’s with friends. " +
         "But remember! You have a goal to achieve but also your happiness to look out for. Find the best medium to maintain Alex’s happiness and focus in school";
+
+    void Update()
+    {
+        if (isTypingInfo && Input.GetKeyDown(KeyCode.Space))
+        {
+            skipTypewriter = true;
+        }
+    }
 
     public void StartBudgetTutorial()
     {
@@ -61,16 +73,28 @@ public class TutorialSliders : MonoBehaviour
         lakwatsaInfo.SetActive(true);
         yield return StartCoroutine(TypeInfo(lakwatsaInfoText, lakwatsaExplanation));
         yield return new WaitForSeconds(delayBetweenReveals);
+
+        confirmButton.SetActive(true);
         // ...and so on (add more wait if needed)
     }
 
     IEnumerator TypeInfo(TextMeshProUGUI infoText, string infoString)
     {
+        isTypingInfo = true;
+        skipTypewriter = false;
         infoText.text = "";
+
         foreach (char c in infoString)
         {
+            if (skipTypewriter)
+            {
+                infoText.text = infoString;
+                break;
+            }
             infoText.text += c;
-            yield return new WaitForSeconds(0.035f); // typing speed
+            yield return new WaitForSeconds(0.035f); // adjust as needed
         }
+
+        isTypingInfo = false;
     }
 }
