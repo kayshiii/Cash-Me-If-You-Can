@@ -12,45 +12,70 @@ public class DialogueLine
 
 public class DialogueManager : MonoBehaviour
 {
-    public DialogueLine[] dialogueLines;
+    public GameObject dialoguePanel;
+    public DialogueLine[] tutorialDialogueLines;
+    public DialogueLine[] finalTutorialDialogueLines;
     public TextMeshProUGUI speakerText;
     public TextMeshProUGUI dialogueText;
     public float lineDelay = 2.5f; // seconds per line;
     public float typeSpeed = 0.035f;
 
-    private int currentIndex = 0;
+    //private int currentIndex = 0;
     private bool isTyping = false;
-    private Coroutine typingCoroutine;
+    //private Coroutine typingCoroutine;
     private bool skipTypewriter = false;
 
-    public TutorialSliders tutorialSliders;
+    public TutorialBudgetAlloc tutorialBudget;
 
     void Update()
     {
-        // If typing, and space is pressed, complete instantly
         if (isTyping && Input.GetKeyDown(KeyCode.Space))
         {
             skipTypewriter = true;
         }
     }
-    public void BeginDialogue()
+
+    public void BeginTutorialDialogue()
     {
-        currentIndex = 0;
-        StartCoroutine(PlayDialogue());
+        StartCoroutine(BeginTutorialFlow());
     }
 
-    IEnumerator PlayDialogue()
+    IEnumerator BeginTutorialFlow()
     {
-        while (currentIndex < dialogueLines.Length)
-        {
-            speakerText.text = dialogueLines[currentIndex].speaker;
-            typingCoroutine = StartCoroutine(TypeLine(dialogueLines[currentIndex].text));
-            yield return typingCoroutine;
-            yield return new WaitForSeconds(lineDelay);
-            currentIndex++;
-        }
+        yield return StartCoroutine(PlayDialogueSequence(tutorialDialogueLines));
+        dialoguePanel.SetActive(false);
+        tutorialBudget.StartBudgetTutorial();
+    }
 
-        tutorialSliders.StartBudgetTutorial();
+    public void BeginFinalTutorialDialogue()
+    {
+        StartCoroutine(PlayFinalDialogueSequence(finalTutorialDialogueLines));
+        // Add any logic for after cutscene here (next scene, menu, etc.)
+    }
+
+    public IEnumerator PlayDialogueSequence(DialogueLine[] dialogueSequence)
+    {
+        dialoguePanel.SetActive(true);
+        for (int i = 0; i < dialogueSequence.Length; i++)
+        {
+            speakerText.text = dialogueSequence[i].speaker;
+            yield return StartCoroutine(TypeLine(dialogueSequence[i].text));
+            yield return new WaitForSeconds(lineDelay);
+        }
+        dialoguePanel.SetActive(false);
+        //tutorialBudget.StartFinalPrompt();
+    }
+    public IEnumerator PlayFinalDialogueSequence(DialogueLine[] dialogueSequence)
+    {
+        dialoguePanel.SetActive(true);
+        for (int i = 0; i < dialogueSequence.Length; i++)
+        {
+            speakerText.text = dialogueSequence[i].speaker;
+            yield return StartCoroutine(TypeLine(dialogueSequence[i].text));
+            yield return new WaitForSeconds(lineDelay);
+        }
+        dialoguePanel.SetActive(false);
+        tutorialBudget.StartFinalPrompt();
     }
 
     IEnumerator TypeLine(string line)
@@ -63,7 +88,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (skipTypewriter)
             {
-                dialogueText.text = line; // show the rest immediately
+                dialogueText.text = line;
                 break;
             }
             dialogueText.text += c;
@@ -73,5 +98,5 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
-    
+
 }

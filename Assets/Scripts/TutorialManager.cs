@@ -5,8 +5,8 @@ using System.Collections;
 
 public class TutorialIntroManager : MonoBehaviour
 {
-    public CanvasGroup introGroup; // Add CanvasGroup to IntroPanel and assign
-    public GameObject dialoguePanel; // Dialogue box UI panel
+    public CanvasGroup introGroup;
+    public GameObject dialoguePanel;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
 
@@ -25,8 +25,9 @@ public class TutorialIntroManager : MonoBehaviour
         yield return StartCoroutine(Fade(introGroup, 1, 0, fadeDuration)); // Fade out
         introGroup.gameObject.SetActive(false);
         dialoguePanel.SetActive(true); // Show dialogue
-        // Trigger dialogue system here (call your dialogue function)
-        dialogueManager.BeginDialogue();
+        Debug.Log("Starting Dialogue");
+
+        dialogueManager.BeginTutorialDialogue();
     }
 
     IEnumerator Fade(CanvasGroup cg, float from, float to, float duration)

@@ -8,7 +8,6 @@ public class FadingScript : MonoBehaviour
     public Image fadeImage; // Assign your black UI Image here in the Inspector
     public float fadeDuration = 1f; // 1 second fade
     public float holdDuration = 3f; // 5 seconds on screen
-    //public string nextSceneName = "GameProperScene"; // Set your next scene here
 
     void Start()
     {
