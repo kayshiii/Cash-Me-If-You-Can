@@ -20,10 +20,14 @@ public class DialogueManager : MonoBehaviour
     public float lineDelay = 2.5f; // seconds per line;
     public float typeSpeed = 0.035f;
 
-    //private int currentIndex = 0;
     private bool isTyping = false;
-    //private Coroutine typingCoroutine;
     private bool skipTypewriter = false;
+
+    // character icons
+    public GameObject alexIcon;
+    public GameObject parentsIcon;
+    public GameObject momIcon;
+    public GameObject dadIcon;
 
     public TutorialBudgetAlloc tutorialBudget;
 
@@ -58,12 +62,51 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         for (int i = 0; i < dialogueSequence.Length; i++)
         {
+            string speaker = dialogueSequence[i].speaker.ToLower().Trim();
+            if (speaker == "alex")
+            {
+                alexIcon.SetActive(true);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "alex's parents")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(true);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "mom")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(true);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "dad")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                dadIcon.SetActive(true);
+                momIcon.SetActive(false);
+            }
+            else
+            {
+                // No icon or add more as needed
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                momIcon.SetActive(false);
+            }
+
             speakerText.text = dialogueSequence[i].speaker;
             yield return StartCoroutine(TypeLine(dialogueSequence[i].text));
             yield return new WaitForSeconds(lineDelay);
         }
         dialoguePanel.SetActive(false);
-        //tutorialBudget.StartFinalPrompt();
+        alexIcon.SetActive(false);
+        parentsIcon.SetActive(false);
     }
     public IEnumerator PlayFinalDialogueSequence(DialogueLine[] dialogueSequence)
     {
