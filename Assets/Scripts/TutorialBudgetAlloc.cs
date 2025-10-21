@@ -40,6 +40,7 @@ public class TutorialBudgetAlloc : MonoBehaviour
     public GameObject condoAnim;
 
     public DialogueManager dialogueManager;
+    public GameManager gameManager;
 
     private bool skipTypewriter = false;
     private bool isTypingInfo = false;
@@ -99,6 +100,10 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
     IEnumerator TutorialSequence()
     {
+        // Give initial budget to player
+        GameManager.Instance.AddBudget(5000);
+        //Debug.Log("Initial budget given: 5000");
+
         sliderGameObj.SetActive(true);
 
         // Show Cash On Hand
@@ -208,6 +213,14 @@ public class TutorialBudgetAlloc : MonoBehaviour
         // playerBudget -= 1000;
         // playerHappiness += 10;
         // playerSocial += 10;
+        /*GameManager.Instance.budget -= 1000;    // Example effect
+        GameManager.Instance.happiness += 10;
+        GameManager.Instance.social += 10;*/
+
+        GameManager.Instance.AddBudget(-1000);
+        GameManager.Instance.AddHappiness(10);
+        GameManager.Instance.AddSocial(10);
+
         choicesObject.SetActive(false);
         StartCoroutine(StaycationAftermath());
     }
@@ -217,6 +230,13 @@ public class TutorialBudgetAlloc : MonoBehaviour
         // playerBudget += 1000;
         // playerHappiness += 0;
         // playerSocial -= 10;
+
+        /*GameManager.Instance.budget += 1000;    // Example effect
+        GameManager.Instance.social -= 10;*/
+
+        GameManager.Instance.AddBudget(1000);
+        GameManager.Instance.AddSocial(-10);
+
         choicesObject.SetActive(false);
         StartCoroutine(SavingAftermath());
     }
@@ -226,6 +246,13 @@ public class TutorialBudgetAlloc : MonoBehaviour
         // playerBudget += 2000;
         // playerHappiness -= 5;
         // playerSocial += 0;
+
+/*        GameManager.Instance.budget += 2000;
+        GameManager.Instance.happiness -= 5;*/
+
+        GameManager.Instance.AddBudget(2000);
+        GameManager.Instance.AddHappiness(5);
+
         choicesObject.SetActive(false);
         StartCoroutine(SellingAftermath());
     }
