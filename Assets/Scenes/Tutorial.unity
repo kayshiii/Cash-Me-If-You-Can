@@ -3294,7 +3294,10 @@ MonoBehaviour:
   happiness: 0
   social: 0
   focus: 0
+  ipon: 0
   currentChapter: 1
+  previousLevelRemainingCash: 0
+  chosenResidence: 0
 --- !u!4 &457017615
 Transform:
   m_ObjectHideFlags: 0
@@ -10261,13 +10264,13 @@ MonoBehaviour:
       mo to school."
   - speaker: Alex
     text: 'Hala, oo nga po. Maybe I can live in a condo nearby nalang? '
-  - speaker: Alex's Dad
+  - speaker: Dad
     text: 'Pwede naman, Nak. We will have to raise your allowance to compensate for
       your additional meals per day. '
-  - speaker: Alex's Mom
+  - speaker: Mom
     text: "If mag uwian ka naman, lower ang allowance mo since you\u2019ll eat here
       naman sa house. "
-  - speaker: Alex's Dad
+  - speaker: Dad
     text: Oo, korek! If mag decide ka mag dorm, that will teach you how to budget
       and at the same time how to be a responsible spender.
   - speaker: Alex
@@ -10280,6 +10283,9 @@ MonoBehaviour:
   parentsIcon: {fileID: 1100352433}
   momIcon: {fileID: 337428328}
   dadIcon: {fileID: 341779576}
+  boyetIcon: {fileID: 0}
+  chapter1DialogueIntro: []
+  chapter1DialogueBoyet: []
   tutorialBudget: {fileID: 2016405789}
 --- !u!4 &1572517997
 Transform:

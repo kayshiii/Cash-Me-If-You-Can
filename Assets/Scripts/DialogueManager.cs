@@ -28,6 +28,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject parentsIcon;
     public GameObject momIcon;
     public GameObject dadIcon;
+    public GameObject boyetIcon;
+
+    // Chapter 1 Dialogues
+    public DialogueLine[] chapter1DialogueIntro; // Alex before Budget Sliders
+    public DialogueLine[] chapter1DialogueBoyet; // Alex meets Boyet
 
     public TutorialBudgetAlloc tutorialBudget;
 
@@ -91,6 +96,15 @@ public class DialogueManager : MonoBehaviour
                 dadIcon.SetActive(true);
                 momIcon.SetActive(false);
             }
+            else if (speaker == "boyet")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                boyetIcon.SetActive(true);
+            }
+
             else
             {
                 // No icon or add more as needed
@@ -113,6 +127,53 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         for (int i = 0; i < dialogueSequence.Length; i++)
         {
+            string speaker = dialogueSequence[i].speaker.ToLower().Trim();
+            if (speaker == "alex")
+            {
+                alexIcon.SetActive(true);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "alex's parents")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(true);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "mom")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(true);
+                dadIcon.SetActive(false);
+            }
+            else if (speaker == "dad")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                dadIcon.SetActive(true);
+                momIcon.SetActive(false);
+            }
+            else if (speaker == "boyet")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                boyetIcon.SetActive(true);
+            }
+
+            else
+            {
+                // No icon or add more as needed
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                momIcon.SetActive(false);
+            }
+
             speakerText.text = dialogueSequence[i].speaker;
             yield return StartCoroutine(TypeLine(dialogueSequence[i].text));
             yield return new WaitForSeconds(lineDelay);
@@ -141,5 +202,35 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
+    // --- CHAPTER 1 ---
+    // Begin first cutscene (Alex getting ready)
+    public void BeginChapter1Intro()
+    {
+        StartCoroutine(PlayChapter1Intro());
+    }
+
+    // Begin Boyet meeting cutscene
+    public void BeginBoyetDialogue()
+    {
+        StartCoroutine(PlayBoyetDialogue());
+    }
+
+    IEnumerator PlayChapter1Intro()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(chapter1DialogueIntro));
+
+        // When this finishes, trigger budget phase
+        FindObjectOfType<Chapter1Manager>().ShowBudgetPanel();
+    }
+
+    IEnumerator PlayBoyetDialogue()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(chapter1DialogueBoyet));
+
+        // When this finishes, show level report
+        FindObjectOfType<Chapter1Manager>().EndChapter1();
+    }
 
 }

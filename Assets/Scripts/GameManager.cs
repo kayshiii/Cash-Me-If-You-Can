@@ -9,9 +9,15 @@ public class GameManager : MonoBehaviour
     public int happiness = 0;
     public int social = 0;
     public int focus = 0;
+    public int ipon = 0;
 
     // Tracking
     public int currentChapter = 1;
+    public int previousLevelRemainingCash = 0;
+
+    // Residence choice
+    public enum ResidenceType { None, Uwian, Condo }
+    public ResidenceType chosenResidence = ResidenceType.None;
 
     void Awake()
     {
@@ -75,6 +81,19 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[Focus] {prev} -> {focus} (Set)");
     }
 
+    public void AddIpon(int amount)
+    {
+        int prev = ipon;
+        ipon += amount;
+        Debug.Log($"[Ipon] {prev} {(amount >= 0 ? "+" : "")}{amount} = {ipon}");
+    }
+    public void SetIpon(int value)
+    {
+        int prev = ipon;
+        ipon = value;
+        Debug.Log($"[Ipon] {prev} -> {ipon} (Set)");
+    }
+
     // For reset/set all
     public void ResetStats()
     {
@@ -82,16 +101,18 @@ public class GameManager : MonoBehaviour
         happiness = 0;
         social = 0;
         focus = 0;
+        ipon = 0;
         currentChapter = 1;
         Debug.Log("[GameManager] Stats reset to zero and chapter 1.");
     }
 
-    public void SetStats(int newBudget, int newHappiness, int newSocial, int newFocus)
+    public void SetStats(int newBudget, int newHappiness, int newSocial, int newFocus, int newIpon)
     {
         budget = newBudget;
         happiness = newHappiness;
         social = newSocial;
         focus = newFocus;
-        Debug.Log($"[SetStats] Budget: {budget}, Happiness: {happiness}, Social: {social}, Focus: {focus}");
+        ipon = newIpon;
+        Debug.Log($"[SetStats] Budget: {budget}, Happiness: {happiness}, Social: {social}, Focus: {focus}, Ipon: {ipon}");
     }
 }

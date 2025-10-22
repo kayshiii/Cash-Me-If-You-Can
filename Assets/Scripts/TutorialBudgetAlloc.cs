@@ -209,49 +209,31 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
     public void OnLakwatsaChoice()
     {
-        // Adjust stats (example)
-        // playerBudget -= 1000;
-        // playerHappiness += 10;
-        // playerSocial += 10;
-        /*GameManager.Instance.budget -= 1000;    // Example effect
-        GameManager.Instance.happiness += 10;
-        GameManager.Instance.social += 10;*/
-
-        GameManager.Instance.AddBudget(-1000);
+        GameManager.Instance.AddBudget(-2000);
         GameManager.Instance.AddHappiness(10);
         GameManager.Instance.AddSocial(10);
+
+        GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
         choicesObject.SetActive(false);
         StartCoroutine(StaycationAftermath());
     }
     public void OnSaveChoice()
     {
-        // Adjust stats (example)
-        // playerBudget += 1000;
-        // playerHappiness += 0;
-        // playerSocial -= 10;
-
-        /*GameManager.Instance.budget += 1000;    // Example effect
-        GameManager.Instance.social -= 10;*/
-
-        GameManager.Instance.AddBudget(1000);
+        GameManager.Instance.AddIpon(1000);
         GameManager.Instance.AddSocial(-10);
+
+        GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
         choicesObject.SetActive(false);
         StartCoroutine(SavingAftermath());
     }
     public void OnSellChoice()
     {
-        // Adjust stats (example)
-        // playerBudget += 2000;
-        // playerHappiness -= 5;
-        // playerSocial += 0;
-
-/*        GameManager.Instance.budget += 2000;
-        GameManager.Instance.happiness -= 5;*/
-
         GameManager.Instance.AddBudget(2000);
         GameManager.Instance.AddHappiness(5);
+
+        GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
         choicesObject.SetActive(false);
         StartCoroutine(SellingAftermath());
@@ -321,12 +303,20 @@ public class TutorialBudgetAlloc : MonoBehaviour
     {
         choices.SetActive(false);
         promptGameObj.SetActive(false);
+        GameManager.Instance.chosenResidence = GameManager.ResidenceType.Uwian;
+        //GameManager.Instance.SetBudget(15000);
+        Debug.Log("Uwian chosen, budget set to 15000");
+
         StartCoroutine(UwianTransition());
     }
     public void OnCondoChoice()
     {
         choices.SetActive(false);
         promptGameObj.SetActive(false);
+        GameManager.Instance.chosenResidence = GameManager.ResidenceType.Condo;
+        //GameManager.Instance.SetBudget(24000);
+        Debug.Log("Condo chosen, budget set to 24000");
+
         StartCoroutine(CondoTransition());
     }
 
