@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     // Tracking
     public int currentChapter = 1;
     public int previousLevelRemainingCash = 0;
+    public int dailyNeedsSpent = 0; 
 
     // Residence choice
     public enum ResidenceType { None, Uwian, Condo }

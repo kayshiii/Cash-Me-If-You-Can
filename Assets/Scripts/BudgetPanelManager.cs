@@ -122,8 +122,9 @@ public class BudgetPanelManager : MonoBehaviour
 
         // -- Save values to GameManager --
         GameManager.Instance.AddIpon(ipon);
-        // In this model, budget = remaining after all allocations
+        GameManager.Instance.dailyNeedsSpent = dailyNeeds;
         GameManager.Instance.SetBudget(startingBudget - (ipon + dailyNeeds + lakwatsa));
+        Debug.Log("[CONFIRM] Saved: dailyNeedsSpent: " + GameManager.Instance.dailyNeedsSpent);
 
         // -- Transition panels --
         budgetPanel.SetActive(false);

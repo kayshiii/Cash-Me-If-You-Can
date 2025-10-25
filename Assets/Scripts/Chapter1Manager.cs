@@ -13,8 +13,9 @@ public class Chapter1Manager : MonoBehaviour
     public DialogueManager dialogueManager;
     public StatsUIUpdater statsUIUpdater;
     public BudgetPanelManager budgetPanelManager;
+
+    public GameObject cutscenePanel;
     public GameObject budgetPanel;
-    public GameObject spendingPanel;
     public GameObject reportPanel;
 
     void Start()
@@ -71,23 +72,23 @@ public class Chapter1Manager : MonoBehaviour
         statsUIUpdater.UpdateUI();
         budgetPanel.SetActive(true);
     }
-
-    public void OnSpendingConfirmed(int spent)
+    public void ProceedToCutscene()
     {
-        // Example stat logic
-        GameManager.Instance.AddBudget(-spent);
-        GameManager.Instance.AddHappiness(5);
-        GameManager.Instance.AddFocus(3);
+        cutscenePanel.SetActive(true);
+        StartCoroutine(ShowCutsceneThenDialogue());
+    }
+    IEnumerator ShowCutsceneThenDialogue()
+    {
+        yield return new WaitForSeconds(2f); // Cutscene duration
+        cutscenePanel.SetActive(false);
 
-        Debug.Log($"[Level1 Spending] Budget left: {GameManager.Instance.budget}");
-        spendingPanel.SetActive(false);
+        // Trigger dialogue
         dialogueManager.BeginBoyetDialogue();
     }
 
-    public void EndChapter1()
+    public void LevelEndReport()
     {
         reportPanel.SetActive(true);
-        // Option for next scene
-        // SceneManager.LoadScene("Chapter2_A_NewMonth");
+        Debug.Log("Level complete. Showing post-level report.");
     }
 }

@@ -229,8 +229,9 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         yield return StartCoroutine(PlayDialogueSequence(chapter1DialogueBoyet));
 
+
         // When this finishes, show level report
-        FindObjectOfType<Chapter1Manager>().EndChapter1();
+        FindObjectOfType<Chapter1Manager>().LevelEndReport();
     }
 
 }
