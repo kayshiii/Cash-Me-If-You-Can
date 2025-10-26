@@ -40,10 +40,17 @@ public class ReportManager : MonoBehaviour
 
     public void OnContinueClicked()
     {
-        // Go to next level or return to menu
-        // For example:
-        SceneManager.LoadScene("Chapter 2");
-        Debug.Log("Continue clicked - proceeding to next level");
-        // gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        // Check current chapter and load next
+        if (GameManager.Instance.currentChapter == 1)
+        {
+            GameManager.Instance.currentChapter = 2;
+            SceneManager.LoadScene("Chapter 2");
+        }
+        else if (GameManager.Instance.currentChapter == 2)
+        {
+            GameManager.Instance.currentChapter = 3;
+            SceneManager.LoadScene("Chapter 3"); // when you create it
+        }
     }
 }

@@ -31,12 +31,13 @@ public class StatsUIUpdater : MonoBehaviour
         focusText.text = GameManager.Instance.focus.ToString();*/
         budgetGoalText.text = $"{GameManager.Instance.ipon:N0} of 80,000";
         cashOnHandText.text = GameManager.Instance.budget.ToString("N0");
+        cashOnHandText.color = cashRemaining < 0 ? Color.red : Color.white;
         //cashOnHand1Text.text = GameManager.Instance.budget.ToString("N0");
 
         // Update circle fills (assuming max value of 100 for each stat)
         socialFillImage.fillAmount = GameManager.Instance.social / 100f;
         happinessFillImage.fillAmount = GameManager.Instance.happiness / 100f;
         focusFillImage.fillAmount = GameManager.Instance.focus / 100f;
-        iponFillImage.fillAmount = GameManager.Instance.ipon / 8000f;
+        iponFillImage.fillAmount = GameManager.Instance.ipon / 80000f;
     }
 }

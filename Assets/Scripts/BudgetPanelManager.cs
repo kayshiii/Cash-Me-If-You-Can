@@ -10,10 +10,12 @@ public class BudgetPanelManager : MonoBehaviour
 
     public TextMeshProUGUI cashOnHandText;
     public TextMeshProUGUI iponGoalText;
-    //public TextMeshProUGUI warningText;
+
+    public Button confirmButton;
 
     public GameObject budgetPanel;
     public GameObject spendingPanel;
+    public GameObject negativeBudgetWarningPanel;
 
     private bool dailyNeedsUsed = false;
 
@@ -94,7 +96,14 @@ public class BudgetPanelManager : MonoBehaviour
             lakwatsaSlider.value = newValue;
         }
 
+        HideNegativeBudgetWarning();
         UpdateAllDisplays();
+    }
+
+    public void HideNegativeBudgetWarning()
+    {
+        if (negativeBudgetWarningPanel != null)
+            negativeBudgetWarningPanel.SetActive(false);
     }
 
     public void UpdateAllDisplays()
@@ -119,6 +128,18 @@ public class BudgetPanelManager : MonoBehaviour
         int ipon = Mathf.RoundToInt(iponSlider.value);
         int dailyNeeds = Mathf.RoundToInt(dailyNeedsSlider.value);
         int lakwatsa = Mathf.RoundToInt(lakwatsaSlider.value);
+
+        int spentTotal = ipon + dailyNeeds + lakwatsa;
+        int cashRemaining = startingBudget - spentTotal;
+
+        if (cashRemaining < 0)
+        {
+            // Show warning
+            if (negativeBudgetWarningPanel != null)
+                negativeBudgetWarningPanel.SetActive(true);
+            Debug.LogWarning("Attempted to confirm budget with negative cash remaining.");
+            return; // Do not proceed
+        }
 
         // -- Save values to GameManager --
         GameManager.Instance.AddIpon(ipon);

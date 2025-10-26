@@ -30,9 +30,14 @@ public class DialogueManager : MonoBehaviour
     public GameObject dadIcon;
     public GameObject boyetIcon;
 
+    public GameObject phoneNotificationPanel;
+    public AudioSource notificationSound;
+
     // Chapter 1 Dialogues
-    public DialogueLine[] chapter1DialogueIntro; // Alex before Budget Sliders
-    public DialogueLine[] chapter1DialogueBoyet; // Alex meets Boyet
+    public DialogueLine[] chapter1DialogueIntro;
+    public DialogueLine[] chapter1DialogueBoyet;
+    // Chapter 2 Dialogues
+    public DialogueLine[] chapter2Dialogue;
 
     public TutorialBudgetAlloc tutorialBudget;
 
@@ -231,7 +236,81 @@ public class DialogueManager : MonoBehaviour
 
 
         // When this finishes, show level report
-        FindObjectOfType<Chapter1Manager>().LevelEndReport();
+        FindObjectOfType<Chapter1Manager>().LevelEndReport  ();
     }
 
+    // --- CHAPTER 1 END ---
+
+    // --- CHAPTER 2 ---
+    public void BeginChapter2Intro()
+    {
+        StartCoroutine(chapter2DialogueIntro());
+    }
+
+    IEnumerator chapter2DialogueIntro()
+    {
+        dialoguePanel.SetActive(true);
+
+        // Play first 3 dialogue lines (Alex, Boyet, Alex)
+        for (int i = 0; i < 3; i++)
+        {
+            string speaker = chapter2Dialogue[i].speaker.ToLower().Trim();
+
+            // Handle speaker icons
+            if (speaker == "alex")
+            {
+                alexIcon.SetActive(true);
+                boyetIcon.SetActive(false);
+            }
+            else if (speaker == "boyet")
+            {
+                alexIcon.SetActive(false);
+                boyetIcon.SetActive(true);
+            }
+
+            speakerText.text = chapter2Dialogue[i].speaker;
+            yield return StartCoroutine(TypeLine(chapter2Dialogue[i].text));
+            yield return new WaitForSeconds(lineDelay);
+        }
+
+        // === PHONE NOTIFICATION PART ===
+        // Play notification sound (optional)
+        if (notificationSound != null)
+        {
+            notificationSound.Play();
+        }
+
+        // Show phone notification panel
+        phoneNotificationPanel.SetActive(true);
+
+        // Wait 5 seconds while notification is visible
+        yield return new WaitForSeconds(5f);
+
+        // Hide notification
+        phoneNotificationPanel.SetActive(false);
+
+        // === CONTINUE DIALOGUE ===
+        // Play remaining dialogue (just "Wait lang, Boyet. BRB!")
+        for (int i = 3; i < chapter2Dialogue.Length; i++)
+        {
+            string speaker = chapter2Dialogue[i].speaker.ToLower().Trim();
+
+            if (speaker == "alex")
+            {
+                alexIcon.SetActive(true);
+                boyetIcon.SetActive(false);
+            }
+
+            speakerText.text = chapter2Dialogue[i].speaker;
+            yield return StartCoroutine(TypeLine(chapter2Dialogue[i].text));
+            yield return new WaitForSeconds(lineDelay);
+        }
+
+        dialoguePanel.SetActive(false);
+        alexIcon.SetActive(false);
+        boyetIcon.SetActive(false);
+
+        // When this finishes, show budget panel
+        FindObjectOfType<Chapter2Manager>().ShowBudgetPanel();
+    }
 }

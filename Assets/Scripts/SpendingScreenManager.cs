@@ -41,6 +41,7 @@ public class SpendingScreenManager : MonoBehaviour
     public GameObject cutscenePanel; // assign in inspector
     public DialogueManager dialogueManager;
     public Chapter1Manager chapter1Manager;
+    public Chapter2Manager chapter2Manager;
 
 
     void Start()
@@ -170,9 +171,26 @@ public class SpendingScreenManager : MonoBehaviour
         int newDailyNeeds = dailyNeedsAvailable - cartTotal;
         GameManager.Instance.dailyNeedsSpent = newDailyNeeds;
 
-        checkOutPanel.SetActive(false);
-        chapter1Manager.ProceedToCutscene();
+        // Key: Add any daily needs leftover back to the main budget
+        if (newDailyNeeds > 0)
+            GameManager.Instance.AddBudget(newDailyNeeds);
 
-        Debug.Log($"Checkout confirmed. New daily needs value: {newDailyNeeds}. cutscene next.");
+        // Update total rollover for next level:
+        GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
+
+        checkOutPanel.SetActive(false);
+
+        // Route based on current chapter
+        if (GameManager.Instance.currentChapter == 1)
+        {
+            chapter1Manager.ProceedToCutscene();
+        }
+        else if (GameManager.Instance.currentChapter == 2)
+        {
+            chapter2Manager.ProceedToCutscene();
+        }
+        // Add more chapters as needed
+
+        Debug.Log($"Checkout confirmed. Remaining: {newDailyNeeds}. Proceeding to cutscene.");
     }
 }
