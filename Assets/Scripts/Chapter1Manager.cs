@@ -15,6 +15,7 @@ public class Chapter1Manager : MonoBehaviour
     public BudgetPanelManager budgetPanelManager;
 
     public GameObject cutscenePanel;
+    public GameObject cutscene1Panel;
     public GameObject budgetPanel;
     public GameObject reportPanel;
 
@@ -46,6 +47,11 @@ public class Chapter1Manager : MonoBehaviour
         yield return new WaitForSeconds(introDuration); // Stay
         yield return StartCoroutine(Fade(titleGroup, 1, 0, fadeDuration)); // Fade out
         titleGroup.gameObject.SetActive(false);
+
+        cutscene1Panel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        cutscene1Panel.SetActive(false);
+
         dialoguePanel.SetActive(true); // Show dialogue
         Debug.Log("Starting Dialogue");
 

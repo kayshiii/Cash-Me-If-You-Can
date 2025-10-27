@@ -17,6 +17,7 @@ public class Chapter2Manager : MonoBehaviour
     public GameObject spendingPanel;
     public GameObject reportPanel;
     public GameObject cutscenePanel;
+    public GameObject cutscene1Panel;
 
     void Start()
     {
@@ -41,6 +42,11 @@ public class Chapter2Manager : MonoBehaviour
         yield return StartCoroutine(Fade(titleGroup, 0, 1, fadeDuration));
         yield return new WaitForSeconds(introDuration);
         yield return StartCoroutine(Fade(titleGroup, 1, 0, fadeDuration));
+
+        cutscene1Panel.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        cutscene1Panel.SetActive(false);
+
         titleGroup.gameObject.SetActive(false);
         dialoguePanel.SetActive(true);
 

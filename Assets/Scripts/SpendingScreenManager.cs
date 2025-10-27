@@ -11,6 +11,9 @@ public class SpendingScreenManager : MonoBehaviour
     {
         public string itemName;
         public int cost;
+        public int happinessChange;
+        public int focusChange;
+        public int socialChange;
         // public Sprite icon; // for later if you want visuals
     }
 
@@ -111,20 +114,19 @@ public class SpendingScreenManager : MonoBehaviour
                 cart.Add(item);
                 cartTotal += item.cost;
                 itemSelected[item] = true;
-                btn.image.color = Color.gray; // or any color for visual feedback
+                btn.image.color = Color.gray;
             }
             else
             {
                 Debug.Log("Not enough daily needs budget!");
-                // Optionally display a warning to the player.
             }
         }
-        else // deselect (remove)
+        else
         {
             cart.Remove(item);
             cartTotal -= item.cost;
             itemSelected[item] = false;
-            btn.image.color = Color.white; // revert to original color
+            btn.image.color = Color.white;
         }
         UpdateNeedsUI();
         UpdateCartCountUI();
@@ -142,7 +144,6 @@ public class SpendingScreenManager : MonoBehaviour
     {
         checkOutPanel.SetActive(false);
         spendingPanel.SetActive(true);
-        // Optionally re-initialize the spending UI if needed
     }
 
     void RenderCheckoutList()
@@ -174,6 +175,23 @@ public class SpendingScreenManager : MonoBehaviour
         // Key: Add any daily needs leftover back to the main budget
         if (newDailyNeeds > 0)
             GameManager.Instance.AddBudget(newDailyNeeds);
+
+        // --- STAT CHANGES: Calculate and apply ---
+        int netHappiness = 0;
+        int netFocus = 0;
+        int netSocial = 0;
+        foreach (var item in cart)
+        {
+            netHappiness += item.happinessChange;
+            netFocus += item.focusChange;
+            netSocial += item.socialChange;
+        }
+        GameManager.Instance.AddHappiness(netHappiness);
+        GameManager.Instance.AddFocus(netFocus);
+        GameManager.Instance.AddSocial(netSocial);
+
+        // Optionally: Debug log what happened
+        Debug.Log($"Spending bonuses: +{netHappiness} happiness, +{netFocus} focus, +{netSocial} social");
 
         // Update total rollover for next level:
         GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
