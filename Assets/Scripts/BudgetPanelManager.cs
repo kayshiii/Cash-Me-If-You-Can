@@ -11,8 +11,6 @@ public class BudgetPanelManager : MonoBehaviour
     public TextMeshProUGUI cashOnHandText;
     public TextMeshProUGUI iponGoalText;
 
-    public Button confirmButton;
-
     public GameObject budgetPanel;
     public GameObject spendingPanel;
     public GameObject negativeBudgetWarningPanel;
