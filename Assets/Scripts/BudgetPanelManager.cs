@@ -98,6 +98,22 @@ public class BudgetPanelManager : MonoBehaviour
         UpdateAllDisplays();
     }
 
+    public void ResetSlidersForReallocation(bool isLakwatsaEvent, int lakwatsaMin)
+    {
+        // Always set ipon and needs to zero
+        iponSlider.value = 0;
+        dailyNeedsSlider.value = 0;
+
+        // Lakwatsa: event-enforced minimum, else leave as zero
+        lakwatsaSlider.minValue = isLakwatsaEvent ? lakwatsaMin : 0;
+        lakwatsaSlider.value = isLakwatsaEvent ? lakwatsaMin : 0;
+
+        dailyNeedsUsed = false;  // Reset state for daily needs slider for new session
+
+        HideNegativeBudgetWarning();
+        UpdateAllDisplays();
+    }
+
     public void HideNegativeBudgetWarning()
     {
         if (negativeBudgetWarningPanel != null)

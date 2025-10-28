@@ -29,6 +29,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject momIcon;
     public GameObject dadIcon;
     public GameObject boyetIcon;
+    public GameObject lolaIcon;
 
     public GameObject phoneNotificationPanel;
     public AudioSource notificationSound;
@@ -38,8 +39,12 @@ public class DialogueManager : MonoBehaviour
     public DialogueLine[] chapter1DialogueBoyet;
     // Chapter 2 Dialogues
     public DialogueLine[] chapter2Dialogue;
+    // Chapter 2 Dialogues
+    public DialogueLine[] chapter3Intro;
+    public DialogueLine[] chapter3Lola;
 
     public TutorialBudgetAlloc tutorialBudget;
+    public Chapter3Manager chapter3Manager;
 
     void Update()
     {
@@ -64,7 +69,6 @@ public class DialogueManager : MonoBehaviour
     public void BeginFinalTutorialDialogue()
     {
         StartCoroutine(PlayFinalDialogueSequence(finalTutorialDialogueLines));
-        // Add any logic for after cutscene here (next scene, menu, etc.)
     }
 
     public IEnumerator PlayDialogueSequence(DialogueLine[] dialogueSequence)
@@ -108,6 +112,15 @@ public class DialogueManager : MonoBehaviour
                 momIcon.SetActive(false);
                 dadIcon.SetActive(false);
                 boyetIcon.SetActive(true);
+            }
+            else if (speaker == "lola mom")
+            {
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                boyetIcon.SetActive(false);
+                lolaIcon.SetActive(true);
             }
 
             else
@@ -236,7 +249,7 @@ public class DialogueManager : MonoBehaviour
 
 
         // When this finishes, show level report
-        FindObjectOfType<Chapter1Manager>().LevelEndReport  ();
+        FindObjectOfType<Chapter1Manager>().LevelEndReport();
     }
 
     // --- CHAPTER 1 END ---
@@ -313,4 +326,33 @@ public class DialogueManager : MonoBehaviour
         // When this finishes, show budget panel
         FindObjectOfType<Chapter2Manager>().ShowBudgetPanel();
     }
+
+    // --- CHAPTER 2 END ---
+
+    // --- CHAPTER 3 ---
+    public void BeginChapter3Intro()
+    {
+        StartCoroutine(PlayChapter3Dialogue());
+    }
+
+    IEnumerator PlayChapter3Dialogue()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(chapter3Intro));
+
+        chapter3Manager.ShowBudgetPanel();
+    }
+
+    public void BeginChapter3Lola()
+    {
+        StartCoroutine(PlayChapter3Lola());
+    }
+    IEnumerator PlayChapter3Lola()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(chapter3Lola));
+
+        chapter3Manager.StartPhoneSeq();
+    }
+    // --- CHAPTER 3 END ---
 }

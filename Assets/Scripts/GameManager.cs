@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int social = 0;
     public int focus = 0;
     public int ipon = 0;
+    public int lakwatsa = 0;
 
     // Tracking
     public int currentChapter = 1;
@@ -93,6 +94,18 @@ public class GameManager : MonoBehaviour
         int prev = ipon;
         ipon = value;
         Debug.Log($"[Ipon] {prev} -> {ipon} (Set)");
+    }
+    public void AddLakwatsa(int amount)
+    {
+        int prev = lakwatsa;
+        ipon += amount;
+        Debug.Log($"[lakwatsa] {prev} {(amount >= 0 ? "+" : "")}{amount} = {lakwatsa}");
+    }
+    public void SetLakwatsa(int value)
+    {
+        int prev = lakwatsa;
+        lakwatsa = value;
+        Debug.Log($"[Lakwatsa] {prev} -> {lakwatsa} (Set)");
     }
 
     // For reset/set all
