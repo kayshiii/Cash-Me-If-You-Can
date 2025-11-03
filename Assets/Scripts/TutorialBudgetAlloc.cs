@@ -201,8 +201,9 @@ public class TutorialBudgetAlloc : MonoBehaviour
         currentCashInfo.SetActive(true);
         yield return StartCoroutine(TypeInfo(currentCashText, currentCashExplanation));
         yield return new WaitForSeconds(delayBetweenReveals);
-
         currentCashInfo.SetActive(false);
+
+        values.SetActive(false);
         promptGameObj.SetActive(true);
         choicesObject.SetActive(true);
     }

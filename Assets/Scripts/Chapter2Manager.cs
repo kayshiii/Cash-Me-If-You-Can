@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Chapter2Manager : MonoBehaviour
 {
     public CanvasGroup titleGroup;
+    public GameObject bgImg;
     public GameObject dialoguePanel;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
@@ -33,7 +34,6 @@ public class Chapter2Manager : MonoBehaviour
         budgetPanelManager.InitializeSlidersToBudget();
         statsUIUpdater.UpdateUI();
 
-        dialoguePanel.SetActive(false);
         StartCoroutine(ShowIntroThenDialogue());
     }
 
@@ -48,8 +48,9 @@ public class Chapter2Manager : MonoBehaviour
         cutscene1Panel.SetActive(false);
 
         titleGroup.gameObject.SetActive(false);
-        dialoguePanel.SetActive(true);
 
+        bgImg.SetActive(true);
+        dialoguePanel.SetActive(true);
         dialogueManager.BeginChapter2Intro();
     }
 

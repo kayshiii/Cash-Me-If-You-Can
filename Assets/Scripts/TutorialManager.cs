@@ -7,6 +7,7 @@ public class TutorialIntroManager : MonoBehaviour
 {
     public CanvasGroup introGroup;
     public GameObject dialoguePanel;
+    public GameObject bgImg;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
 
@@ -27,6 +28,7 @@ public class TutorialIntroManager : MonoBehaviour
         dialoguePanel.SetActive(true); // Show dialogue
         Debug.Log("Starting Dialogue");
 
+        bgImg.SetActive(true);
         dialogueManager.BeginTutorialDialogue();
     }
 

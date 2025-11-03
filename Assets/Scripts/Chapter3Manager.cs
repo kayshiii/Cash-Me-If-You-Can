@@ -12,6 +12,7 @@ using static UnityEngine.ParticleSystem;
 public class Chapter3Manager : MonoBehaviour
 {
     public CanvasGroup titleGroup;
+    public GameObject bgImg;
     public GameObject dialoguePanel;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
@@ -62,7 +63,6 @@ public class Chapter3Manager : MonoBehaviour
         budgetPanelManager.InitializeSlidersToBudget();
         statsUIUpdater.UpdateUI();
 
-        dialoguePanel.SetActive(false);
         StartCoroutine(ShowIntroThenDialogue());    
     }
 
@@ -76,6 +76,7 @@ public class Chapter3Manager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         cutscene1Panel.SetActive(false);
 
+        bgImg.SetActive(true);
         titleGroup.gameObject.SetActive(false);
         dialoguePanel.SetActive(true);
 

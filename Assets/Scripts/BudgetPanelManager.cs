@@ -52,9 +52,9 @@ public class BudgetPanelManager : MonoBehaviour
     public void OnSliderChanged(string changedSlider)
     {
         // Clamp so total doesn't exceed budget
-        int ipon = Mathf.RoundToInt(iponSlider.value);
-        int needs = Mathf.RoundToInt(dailyNeedsSlider.value);
-        int lakwatsa = Mathf.RoundToInt(lakwatsaSlider.value);
+        int ipon = QuantizeToStep(Mathf.RoundToInt(iponSlider.value), 50);
+        int needs = QuantizeToStep(Mathf.RoundToInt(dailyNeedsSlider.value), 50);
+        int lakwatsa = QuantizeToStep(Mathf.RoundToInt(lakwatsaSlider.value), 50);
 
         int otherSum = 0;
         int newValue = 0;
@@ -64,6 +64,9 @@ public class BudgetPanelManager : MonoBehaviour
         {
             otherSum = needs + lakwatsa;
             newValue = Mathf.Clamp(ipon, 0, startingBudget - otherSum);
+
+            // Quantize after clamping
+            newValue = QuantizeToStep(newValue, 50);
             iponSlider.value = newValue;
         }
         else if (changedSlider == "needs")
@@ -74,7 +77,10 @@ public class BudgetPanelManager : MonoBehaviour
             if (!dailyNeedsUsed && needs > 0)
             {
                 // First movement: If above 0 but below min, snap to min
-                needs = Mathf.Max(min, needs);
+                // Snap to quantized minimum on first movement
+                int snappedMin = QuantizeToStep(min, 50);
+                needs = Mathf.Max(snappedMin, needs);
+                needs = QuantizeToStep(needs, 50);
                 dailyNeedsSlider.value = needs;
                 dailyNeedsUsed = true;
             }
@@ -83,7 +89,9 @@ public class BudgetPanelManager : MonoBehaviour
                 // Now always clamp between min and the max possible
                 int maxPossible = startingBudget - otherSum;
                 maxPossible = Mathf.Max(maxPossible, min);
+
                 newValue = Mathf.Clamp(needs, min, maxPossible);
+                newValue = QuantizeToStep(newValue, 50);
                 dailyNeedsSlider.value = newValue;
             }
         }
@@ -91,6 +99,9 @@ public class BudgetPanelManager : MonoBehaviour
         {
             otherSum = ipon + needs;
             newValue = Mathf.Clamp(lakwatsa, 0, startingBudget - otherSum);
+            
+            // Quantize after clamping
+            newValue = QuantizeToStep(newValue, 50);
             lakwatsaSlider.value = newValue;
         }
 
@@ -98,6 +109,10 @@ public class BudgetPanelManager : MonoBehaviour
         UpdateAllDisplays();
     }
 
+    int QuantizeToStep(int value, int step)
+    {
+        return Mathf.RoundToInt((float)value / step) * step;
+    }
     public void ResetSlidersForReallocation(bool isLakwatsaEvent, int lakwatsaMin)
     {
         // Always set ipon and needs to zero

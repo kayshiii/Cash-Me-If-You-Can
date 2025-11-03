@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Chapter1Manager : MonoBehaviour
 {
     public CanvasGroup titleGroup;
+    public GameObject bgImg;
     public GameObject dialoguePanel;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
@@ -37,7 +38,6 @@ public class Chapter1Manager : MonoBehaviour
         statsUIUpdater.UpdateUI();
 
         // 6. Hide dialogue for now, then start intro sequence
-        dialoguePanel.SetActive(false);
         StartCoroutine(ShowIntroThenDialogue());
     }
 
@@ -52,7 +52,8 @@ public class Chapter1Manager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         cutscene1Panel.SetActive(false);
 
-        dialoguePanel.SetActive(true); // Show dialogue
+        bgImg.SetActive(true);
+        dialoguePanel.SetActive(true);
         Debug.Log("Starting Dialogue");
 
         dialogueManager.BeginChapter1Intro();
