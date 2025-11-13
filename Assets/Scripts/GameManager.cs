@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        happiness = 50;
+        social = 50;
+        focus = 50;
     }
 
     // --- Debug-Friendly Stat Methods ---
