@@ -9674,9 +9674,9 @@ MonoBehaviour:
     socialChange: 0
   - itemName: Snacks
     cost: 80
-    happinessChange: 0
+    happinessChange: 3
     focusChange: 0
-    socialChange: 0
+    socialChange: 2
   - itemName: Grocery
     cost: 3000
     happinessChange: 0
@@ -9700,22 +9700,22 @@ MonoBehaviour:
     socialChange: 0
   - itemName: Snacks
     cost: 80
-    happinessChange: 0
+    happinessChange: 3
     focusChange: 0
-    socialChange: 0
-  - itemName: Train
-    cost: 30
-    happinessChange: 0
+    socialChange: 2
+  - itemName: JoyKasIt
+    cost: 8400
+    happinessChange: 2
     focusChange: 0
     socialChange: 0
   - itemName: Grab
     cost: 280
-    happinessChange: 0
+    happinessChange: 3
     focusChange: 0
     socialChange: 0
-  - itemName: Bus
+  - itemName: P2P Bus
     cost: 80
-    happinessChange: 0
+    happinessChange: 2
     focusChange: 0
     socialChange: 0
   itemGrid: {fileID: 1672367402}
