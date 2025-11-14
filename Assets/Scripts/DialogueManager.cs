@@ -319,7 +319,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     // --- CHAPTER 1 ---
-    // Begin first cutscene (Alex getting ready)
     public void BeginChapter1Intro()
     {
         StartCoroutine(PlayChapter1Intro());
@@ -372,15 +371,31 @@ public class DialogueManager : MonoBehaviour
             {
                 alexIcon.SetActive(true);
                 boyetIcon.SetActive(false);
+
+                textBubAlexText.gameObject.SetActive(true);
+                textBubAlex.SetActive(true);
+                textBubText.gameObject.SetActive(false);
+                textBub.SetActive(false);
+
+                textBubAlexText.text = ""; // Reset bubble text
+
+                yield return StartCoroutine(TypeLine(textBubAlexText, chapter2Dialogue[i].text));
             }
             else if (speaker == "boyet")
             {
                 alexIcon.SetActive(false);
                 boyetIcon.SetActive(true);
+
+                textBubText.gameObject.SetActive(true);
+                textBub.SetActive(true);
+                textBubAlexText.gameObject.SetActive(false);
+                textBubAlex.SetActive(false);
+
+                textBubText.text = ""; // Reset bubble text
+
+                yield return StartCoroutine(TypeLine(textBubText, chapter2Dialogue[i].text));
             }
 
-            //speakerText.text = chapter2Dialogue[i].speaker;
-            //yield return StartCoroutine(TypeLine(chapter2Dialogue[i].text));
             yield return new WaitForSeconds(lineDelay);
         }
 
@@ -410,10 +425,17 @@ public class DialogueManager : MonoBehaviour
             {
                 alexIcon.SetActive(true);
                 boyetIcon.SetActive(false);
+
+                textBubAlexText.gameObject.SetActive(true);
+                textBubAlex.SetActive(true);
+                textBubText.gameObject.SetActive(false);
+                textBub.SetActive(false);
+
+                textBubAlexText.text = ""; // Reset bubble text
+
+                yield return StartCoroutine(TypeLine(textBubAlexText, chapter2Dialogue[i].text));
             }
 
-            /*speakerText.text = chapter2Dialogue[i].speaker;
-            yield return StartCoroutine(TypeLine(chapter2Dialogue[i].text));*/
             yield return new WaitForSeconds(lineDelay);
         }
 
