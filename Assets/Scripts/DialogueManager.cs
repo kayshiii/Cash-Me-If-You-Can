@@ -178,6 +178,15 @@ public class DialogueManager : MonoBehaviour
                 dadIcon.SetActive(false);
                 boyetIcon.SetActive(false);
                 lolaIcon.SetActive(true);
+
+                textBubAlexText.gameObject.SetActive(true);
+                textBubAlex.SetActive(true);
+                textBubText.gameObject.SetActive(false);
+                textBub.SetActive(false);
+
+                textBubAlexText.text = ""; // Reset bubble text
+
+                yield return StartCoroutine(TypeLine(textBubAlexText, dialogueSequence[i].text));
             }
 
             else
