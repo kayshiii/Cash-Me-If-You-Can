@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     public DialogueLine[] tutorialDialogueLines;
     public DialogueLine[] finalTutorialDialogueLines;
     public TextMeshProUGUI speakerText;
-    public TextMeshProUGUI dialogueText;
+    //public TextMeshProUGUI dialogueText;
     public float lineDelay = 2.5f; // seconds per line;
     public float typeSpeed = 0.035f;
 
@@ -94,6 +94,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 momIcon.SetActive(false);
                 dadIcon.SetActive(false);
+                boyetIcon.SetActive(false);
 
                 textBubAlexText.gameObject.SetActive(true);
                 textBubAlex.SetActive(true);
