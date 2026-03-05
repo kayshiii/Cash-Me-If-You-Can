@@ -11374,8 +11374,8 @@ MonoBehaviour:
   - speaker: Alex
     text: "Hmmm\u2026 sige po let me think muna."
   speakerText: {fileID: 455095898}
-  lineDelay: 2.5
-  typeSpeed: 0.035
+  lineDelay: 0.5
+  typeSpeed: 0.001
   alexIcon: {fileID: 1794891170}
   parentsIcon: {fileID: 831419967}
   momIcon: {fileID: 737937223}

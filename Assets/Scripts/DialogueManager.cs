@@ -18,11 +18,13 @@ public class DialogueManager : MonoBehaviour
     public DialogueLine[] finalTutorialDialogueLines;
     public TextMeshProUGUI speakerText;
     //public TextMeshProUGUI dialogueText;
-    public float lineDelay = 2.5f; // seconds per line;
+    public float lineDelay = 0.5f; // seconds per line;
     public float typeSpeed = 0.035f;
 
     private bool isTyping = false;
     private bool skipTypewriter = false;
+    private bool lineFinished = false;
+    private bool proceedToNextLine = false;
 
     // character icons
     public GameObject alexIcon;
@@ -55,9 +57,17 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if (isTyping && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            skipTypewriter = true;
+            if (isTyping)
+            {
+                // First press while typing → reveal instantly
+                skipTypewriter = true;
+            }
+            else
+            {
+                proceedToNextLine = true;
+            }
         }
     }
 
@@ -198,7 +208,7 @@ public class DialogueManager : MonoBehaviour
                 momIcon.SetActive(false);
             }
 
-            yield return new WaitForSeconds(lineDelay);
+            //yield return new WaitForSeconds(lineDelay);
         }
         dialoguePanel.SetActive(false);
         alexIcon.SetActive(false);
@@ -311,6 +321,7 @@ public class DialogueManager : MonoBehaviour
     {
         isTyping = true;
         skipTypewriter = false;
+        lineFinished = false;
         target.text = "";
 
         foreach (char c in line)
@@ -325,6 +336,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+
+        // Wait here until player presses Space again
+        yield return new WaitUntil(() => proceedToNextLine);
+
+        proceedToNextLine = false;
     }
 
     // --- CHAPTER 1 ---
