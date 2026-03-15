@@ -15,11 +15,13 @@ public class DialogueManager : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public DialogueLine[] tutorialDialogueLines;
+    public DialogueLine[] tutorialLolaLines;
     public DialogueLine[] finalTutorialDialogueLines;
     public TextMeshProUGUI speakerText;
     //public TextMeshProUGUI dialogueText;
+
     public float lineDelay = 0.5f; // seconds per line;
-    public float typeSpeed = 0.035f;
+    public float typeSpeed = 0.001f;
 
     private bool isTyping = false;
     private bool skipTypewriter = false;
@@ -40,6 +42,15 @@ public class DialogueManager : MonoBehaviour
     public GameObject textBub;
     public TextMeshProUGUI textBubText;
 
+    //pop up
+    public GameObject popupPanel;
+    public GameObject moneyIcon;
+    public TextMeshProUGUI popUpText;
+    public float moneyPopupDuration = 2f;
+
+    //next icon
+    public GameObject nextIcon;
+
     public GameObject phoneNotificationPanel;
     public AudioSource notificationSound;
 
@@ -54,6 +65,7 @@ public class DialogueManager : MonoBehaviour
 
     public TutorialBudgetAlloc tutorialBudget;
     public Chapter3Manager chapter3Manager;
+    public TutorialIntroManager introManager;
 
     void Update()
     {
@@ -79,6 +91,12 @@ public class DialogueManager : MonoBehaviour
     IEnumerator BeginTutorialFlow()
     {
         yield return StartCoroutine(PlayDialogueSequence(tutorialDialogueLines));
+        yield return StartCoroutine(introManager.Fade(introManager.fadeGroup, 0f, 1f, introManager.fadeDuration));
+        introManager.bgImg.SetActive(false);
+        introManager.lolaBgImg.SetActive(true);
+        yield return StartCoroutine(introManager.Fade(introManager.fadeGroup, 1f, 0f, introManager.fadeDuration));
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(tutorialLolaLines));
         dialoguePanel.SetActive(false);
         tutorialBudget.StartBudgetTutorial();
     }
@@ -97,7 +115,35 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < dialogueSequence.Length; i++)
         {
             string speaker = dialogueSequence[i].speaker.ToLower().Trim();
-            if (speaker == "alex")
+            if (speaker == "popup")
+            {
+                popupPanel.SetActive(true);
+                moneyIcon.SetActive(true);
+                popUpText.gameObject.SetActive(true);
+
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                boyetIcon.SetActive(false);
+                lolaIcon.SetActive(false);
+
+                textBubAlexText.gameObject.SetActive(false);
+                textBubAlex.SetActive(false);
+                textBubText.gameObject.SetActive(false);
+                textBub.SetActive(false);
+
+                popUpText.text = dialogueSequence[i].text;
+                //popUpText.text = "";
+
+                yield return new WaitForSeconds(moneyPopupDuration);
+                popupPanel.SetActive(false);
+                moneyIcon.SetActive(false);
+                popUpText.gameObject.SetActive(false);
+
+                continue; // Skip normal dialogue handling for this line
+            }
+            else if (speaker == "alex")
             {
                 alexIcon.SetActive(true);
                 textBub.SetActive(true);
@@ -105,6 +151,7 @@ public class DialogueManager : MonoBehaviour
                 momIcon.SetActive(false);
                 dadIcon.SetActive(false);
                 boyetIcon.SetActive(false);
+                lolaIcon.SetActive(false);
 
                 textBubAlexText.gameObject.SetActive(true);
                 textBubAlex.SetActive(true);
@@ -113,6 +160,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubAlexText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubAlexText, dialogueSequence[i].text));
             }
             else if (speaker == "alex's parents")
@@ -129,6 +177,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "mom")
@@ -137,6 +186,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 momIcon.SetActive(true);
                 dadIcon.SetActive(false);
+                lolaIcon.SetActive(false);
 
                 textBubText.gameObject.SetActive(true);
                 textBub.SetActive(true);
@@ -145,6 +195,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "dad")
@@ -153,6 +204,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 dadIcon.SetActive(true);
                 momIcon.SetActive(false);
+                lolaIcon.SetActive(false);
 
                 textBubText.gameObject.SetActive(true);
                 textBub.SetActive(true);
@@ -161,6 +213,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "boyet")
@@ -170,6 +223,7 @@ public class DialogueManager : MonoBehaviour
                 momIcon.SetActive(false);
                 dadIcon.SetActive(false);
                 boyetIcon.SetActive(true);
+                lolaIcon.SetActive(false);
 
                 textBubText.gameObject.SetActive(true);
                 textBub.SetActive(true);
@@ -178,6 +232,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "lola mom")
@@ -196,6 +251,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubAlexText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubAlexText, dialogueSequence[i].text));
             }
 
@@ -206,6 +262,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 dadIcon.SetActive(false);
                 momIcon.SetActive(false);
+                lolaIcon.SetActive(false);
             }
 
             //yield return new WaitForSeconds(lineDelay);
@@ -216,6 +273,8 @@ public class DialogueManager : MonoBehaviour
     }
     public IEnumerator PlayFinalDialogueSequence(DialogueLine[] dialogueSequence)
     {
+        introManager.lolaBgImg.SetActive(false);
+        introManager.bgImg.SetActive(true);
         dialoguePanel.SetActive(true);
         for (int i = 0; i < dialogueSequence.Length; i++)
         {
@@ -226,6 +285,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 momIcon.SetActive(false);
                 dadIcon.SetActive(false);
+                lolaIcon.SetActive(false);
 
                 textBubAlexText.gameObject.SetActive(true);
                 textBubAlex.SetActive(true);
@@ -234,6 +294,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubAlexText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubAlexText, dialogueSequence[i].text));
             }
             else if (speaker == "alex's parents")
@@ -250,6 +311,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "mom")
@@ -266,6 +328,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "dad")
@@ -274,6 +337,7 @@ public class DialogueManager : MonoBehaviour
                 parentsIcon.SetActive(false);
                 dadIcon.SetActive(true);
                 momIcon.SetActive(false);
+                lolaIcon.SetActive(false);
 
                 textBubText.gameObject.SetActive(true);
                 textBub.SetActive(true);
@@ -282,6 +346,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
             else if (speaker == "boyet")
@@ -299,6 +364,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, dialogueSequence[i].text));
             }
 
@@ -322,7 +388,11 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
         skipTypewriter = false;
         lineFinished = false;
+        proceedToNextLine = false;
         target.text = "";
+
+        // hide icon while typing
+        if (nextIcon != null) nextIcon.SetActive(false);
 
         foreach (char c in line)
         {
@@ -337,10 +407,15 @@ public class DialogueManager : MonoBehaviour
 
         isTyping = false;
 
-        // Wait here until player presses Space again
-        yield return new WaitUntil(() => proceedToNextLine);
+        // show icon when ready to go next
+        if (nextIcon != null) nextIcon.SetActive(true);
 
+        // Wait for Space/click
+        yield return new WaitUntil(() => proceedToNextLine);
         proceedToNextLine = false;
+
+        // hide again right after consuming the input
+        if (nextIcon != null) nextIcon.SetActive(false);
     }
 
     // --- CHAPTER 1 ---
@@ -404,6 +479,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubAlexText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubAlexText, chapter2Dialogue[i].text));
             }
             else if (speaker == "boyet")
@@ -418,6 +494,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubText, chapter2Dialogue[i].text));
             }
 
@@ -458,6 +535,7 @@ public class DialogueManager : MonoBehaviour
 
                 textBubAlexText.text = ""; // Reset bubble text
 
+                nextIcon.SetActive(false);
                 yield return StartCoroutine(TypeLine(textBubAlexText, chapter2Dialogue[i].text));
             }
 
