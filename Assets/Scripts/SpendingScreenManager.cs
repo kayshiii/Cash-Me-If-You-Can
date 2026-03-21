@@ -41,7 +41,7 @@ public class SpendingScreenManager : MonoBehaviour
     private Dictionary<SpendingItem, bool> itemSelected = new Dictionary<SpendingItem, bool>();
     private Dictionary<Button, SpendingItem> buttonToItem = new Dictionary<Button, SpendingItem>();
 
-    public GameObject cutscenePanel; // assign in inspector
+    public GameObject cutscenePanel;
     public DialogueManager dialogueManager;
     public Chapter1Manager chapter1Manager;
     public Chapter2Manager chapter2Manager;

@@ -29,7 +29,7 @@ public class Chapter3Manager : MonoBehaviour
     public GameObject cutscenePanel;
     public GameObject cutscene1Panel;
     public GameObject phonePanel;
-    public GameObject lolaDecisionPanel;
+    //public GameObject lolaDecisionPanel;
     public GameObject choicesPanel;
 
     public List<GameObject> phoneChatBubbles; // Assign in order Boyet/Alex
@@ -48,6 +48,8 @@ public class Chapter3Manager : MonoBehaviour
     public TextMeshProUGUI promptText;
     public string promptMessage = "What do you think Alex? This could be a good time to bond with your classmates. And who knows? This might even lead to new opportunities in the future! " +
         "Pero, it could also be better to just save some money for your Ipon.It also never hurts to be more prepared for any unfortunate situation that could happen!";
+
+    public GameObject buttonsGO;
 
     void Start()
     {
@@ -144,6 +146,14 @@ public class Chapter3Manager : MonoBehaviour
         int startingBudget = GameManager.Instance.budget;
         int cashRemaining = startingBudget - spentTotal;
 
+        if (cashRemaining < 0)
+        {
+            if (budgetPanelManager.negativeBudgetWarningPanel != null)
+                budgetPanelManager.negativeBudgetWarningPanel.SetActive(true);
+            Debug.LogWarning("Attempted to confirm Chapter 3 first budget with negative cash remaining.");
+            return;
+        }
+
         // Store initial budget before decision to restore if declined
         initialBudgetBeforeDecision = GameManager.Instance.budget;
 
@@ -163,7 +173,9 @@ public class Chapter3Manager : MonoBehaviour
     IEnumerator promptTexting()
     {
         yield return StartCoroutine(TypeInfo(promptText, promptMessage));
-        yield return new WaitForSeconds(4f); // or require spacebar to continue
+        //yield return new WaitForSeconds(4f); // or require spacebar to continue
+        if (buttonsGO != null)
+            buttonsGO.SetActive(true);
     }
     IEnumerator TypeInfo(TextMeshProUGUI infoText, string infoString)
     {
@@ -179,7 +191,7 @@ public class Chapter3Manager : MonoBehaviour
                 break;
             }
             infoText.text += c;
-            yield return new WaitForSeconds(0.035f); // adjust as needed
+            yield return new WaitForSeconds(0.001f); // adjust as needed
         }
 
         isTypingInfo = false;
@@ -188,7 +200,7 @@ public class Chapter3Manager : MonoBehaviour
     public void ShowLolaDecision()
     {
         phonePanel.SetActive(false);
-        lolaDecisionPanel.SetActive(true);
+        //lolaDecisionPanel.SetActive(true);
 
         promptTextFunc();
 
@@ -198,7 +210,7 @@ public class Chapter3Manager : MonoBehaviour
     public void OnDecisionTripAccept()
     {
         choicesPanel.SetActive(false);
-        lolaDecisionPanel.SetActive(false);
+        //lolaDecisionPanel.SetActive(false);
 
         // Reset the budget back to initial before the decision
         GameManager.Instance.SetBudget(initialBudgetBeforeDecision);
@@ -217,6 +229,22 @@ public class Chapter3Manager : MonoBehaviour
     }
     public void OnSecondBudgetConfirmed()
     {
+        int ipon = Mathf.RoundToInt(budgetPanelManager.iponSlider.value);
+        int dailyNeeds = Mathf.RoundToInt(budgetPanelManager.dailyNeedsSlider.value);
+        int lakwatsa = Mathf.RoundToInt(budgetPanelManager.lakwatsaSlider.value);
+
+        int startingBudget = GameManager.Instance.budget;
+        int spentTotal = ipon + dailyNeeds + lakwatsa;
+        int cashRemaining = startingBudget - spentTotal;
+
+        if (cashRemaining < 0)
+        {
+            if (budgetPanelManager.negativeBudgetWarningPanel != null)
+                budgetPanelManager.negativeBudgetWarningPanel.SetActive(true);
+            Debug.LogWarning("Attempted to confirm Chapter 3 second budget with negative cash remaining.");
+            return; // Do not proceed
+        }
+
         budgetPanel.SetActive(false);
         // Stat effect for joining: +15 happiness, +10 social, -5 focus
         GameManager.Instance.AddHappiness(15);
@@ -234,7 +262,7 @@ public class Chapter3Manager : MonoBehaviour
 
     public void OnDecisionTripDecline()
     {
-        lolaDecisionPanel.SetActive(false);
+        //lolaDecisionPanel.SetActive(false);
 
         // Use stored temp values as final values for the game state
         GameManager.Instance.SetIpon(tempIpon);
@@ -255,15 +283,17 @@ public class Chapter3Manager : MonoBehaviour
 
     public void ProceedToCutscene()
     {
-        cutscenePanel.SetActive(true);
-        StartCoroutine(ShowCutsceneThenReport());
+        StartCoroutine(CutsceneThenDialogueThenReport());
     }
 
-    IEnumerator ShowCutsceneThenReport()
+    IEnumerator CutsceneThenDialogueThenReport()
     {
+        cutscenePanel.SetActive(true);
         yield return new WaitForSeconds(3f);
         cutscenePanel.SetActive(false);
-        LevelEndReport();
+
+        dialoguePanel.SetActive(true);
+        dialogueManager.BeginChapter3EndDialogue();
     }
 
     public void LevelEndReport()

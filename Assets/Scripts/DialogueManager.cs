@@ -66,6 +66,7 @@ public class DialogueManager : MonoBehaviour
     [Header("CH3 dia")]
     public DialogueLine[] chapter3Intro;
     public DialogueLine[] chapter3Lola;
+    public DialogueLine[] finalChapter3Dialogue;
 
     [Header("Scripts")]
     public TutorialBudgetAlloc tutorialBudget;
@@ -610,6 +611,19 @@ public class DialogueManager : MonoBehaviour
         yield return StartCoroutine(PlayDialogueSequence(chapter3Lola));
 
         chapter3Manager.StartPhoneSeq();
+    }
+    public void BeginChapter3EndDialogue()
+    {
+        StartCoroutine(PlayChapter3EndDialogueFlow());
+    }
+
+    private IEnumerator PlayChapter3EndDialogueFlow()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(finalChapter3Dialogue));
+
+        // When dialogue is done, show report
+        chapter3Manager.LevelEndReport();
     }
     // --- CHAPTER 3 END ---
 }
