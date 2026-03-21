@@ -10,6 +10,7 @@ public class Chapter2Manager : MonoBehaviour
     public GameObject dialoguePanel;
     public float introDuration = 2f;
     public float fadeDuration = 2f;
+    private bool nextCutsceneStep = false;
 
     public DialogueManager dialogueManager;
     public StatsUIUpdater statsUIUpdater;
@@ -43,8 +44,16 @@ public class Chapter2Manager : MonoBehaviour
         yield return new WaitForSeconds(introDuration);
         yield return StartCoroutine(Fade(titleGroup, 1, 0, fadeDuration));
 
-        cutscene1Panel.SetActive(true);
+        /*cutscene1Panel.SetActive(true);
         yield return new WaitForSeconds(3f);
+        cutscene1Panel.SetActive(false);*/
+
+        cutscene1Panel.SetActive(true);
+        nextCutsceneStep = false;
+
+        // Wait until player presses the Next button on this panel
+        yield return new WaitUntil(() => nextCutsceneStep);
+
         cutscene1Panel.SetActive(false);
 
         titleGroup.gameObject.SetActive(false);
@@ -66,6 +75,11 @@ public class Chapter2Manager : MonoBehaviour
         cg.alpha = to;
     }
 
+    public void OnCutsceneNextButton()
+    {
+        nextCutsceneStep = true;
+    }
+
     public void ShowBudgetPanel()
     {
         statsUIUpdater.UpdateUI();
@@ -80,7 +94,11 @@ public class Chapter2Manager : MonoBehaviour
     IEnumerator CutsceneThenDialogueThenReport()
     {
         cutscenePanel.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(3f);
+        nextCutsceneStep = false;
+
+        // Wait for Next button on this panel
+        yield return new WaitUntil(() => nextCutsceneStep);
         cutscenePanel.SetActive(false);
         dialoguePanel.SetActive(true);
         dialogueManager.BeginChapter2EndDialogue();

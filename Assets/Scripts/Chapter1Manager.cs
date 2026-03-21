@@ -20,6 +20,8 @@ public class Chapter1Manager : MonoBehaviour
     public GameObject budgetPanel;
     public GameObject reportPanel;
 
+    private bool nextCutsceneStep = false;
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -48,8 +50,16 @@ public class Chapter1Manager : MonoBehaviour
         yield return StartCoroutine(Fade(titleGroup, 1, 0, fadeDuration)); // Fade out
         titleGroup.gameObject.SetActive(false);
 
-        cutscene1Panel.SetActive(true);
+        /*cutscene1Panel.SetActive(true);
         yield return new WaitForSeconds(3f);
+        cutscene1Panel.SetActive(false);*/
+
+        cutscene1Panel.SetActive(true);
+        nextCutsceneStep = false;
+
+        // Wait until the player presses the Next button
+        yield return new WaitUntil(() => nextCutsceneStep);
+
         cutscene1Panel.SetActive(false);
 
         bgImg.SetActive(true);
@@ -70,6 +80,10 @@ public class Chapter1Manager : MonoBehaviour
         }
         cg.alpha = to;
     }
+    public void OnCutsceneNextButton()
+    {
+        nextCutsceneStep = true;
+    }
 
     public void ShowBudgetPanel()
     {
@@ -83,7 +97,14 @@ public class Chapter1Manager : MonoBehaviour
     }
     IEnumerator ShowCutsceneThenDialogue()
     {
-        yield return new WaitForSeconds(2f); // Cutscene duration
+        /*yield return new WaitForSeconds(2f); // Cutscene duration
+        cutscenePanel.SetActive(false);*/
+
+        nextCutsceneStep = false;
+
+        // Wait for Next button on this panel
+        yield return new WaitUntil(() => nextCutsceneStep);
+
         cutscenePanel.SetActive(false);
 
         // Trigger dialogue

@@ -67,6 +67,9 @@ public class DialogueManager : MonoBehaviour
     public DialogueLine[] chapter3Intro;
     public DialogueLine[] chapter3Lola;
     public DialogueLine[] finalChapter3Dialogue;
+    [Header("normal ch (1st dia - notif - 2nd dia)")]
+    public DialogueLine[] normIntro;
+    public DialogueLine[] finalnormDialogue;
 
     [Header("Scripts")]
     public TutorialBudgetAlloc tutorialBudget;

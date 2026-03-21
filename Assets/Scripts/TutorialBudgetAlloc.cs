@@ -70,6 +70,7 @@ public class TutorialBudgetAlloc : MonoBehaviour
     private bool proceedToNextStep = false;
 
     public float delayBetweenReveals = 3.5f;
+    private bool nextAftermathStep = false;
 
     // UI text fields
     public TextMeshProUGUI OnhandcashText;
@@ -292,15 +293,21 @@ public class TutorialBudgetAlloc : MonoBehaviour
         choices.SetActive(false);
         StartCoroutine(SellingAftermath());
     }
-
+    public void OnAftermathNextButton()
+    {
+        nextAftermathStep = true;
+    }
     IEnumerator StaycationAftermath()
     {
         staycationAnim.SetActive(true);
+        nextAftermathStep = false;
 
-        if (staycationText != null)
-            yield return StartCoroutine(TypeInfo(staycationText, staycationInfo.text));
-        
-        yield return new WaitForSeconds(2f);
+        /*if (staycationText != null)
+            yield return StartCoroutine(TypeInfo(staycationText, staycationInfo.text));*/
+
+        //yield return new WaitForSeconds(2f);
+
+        yield return new WaitUntil(() => nextAftermathStep);
 
         staycationAnim.SetActive(false);
         values.SetActive(false);
@@ -311,10 +318,11 @@ public class TutorialBudgetAlloc : MonoBehaviour
     {
         savingAnim.SetActive(true);
 
-        if (savingText != null)
+        /*if (savingText != null)
             yield return StartCoroutine(TypeInfo(savingText, savingInfo.text));
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);*/
+        yield return new WaitUntil(() => nextAftermathStep);
 
         savingAnim.SetActive(false);
         values.SetActive(false);
@@ -325,10 +333,11 @@ public class TutorialBudgetAlloc : MonoBehaviour
     {
         sellingAnim.SetActive(true);
 
-        if (sellingText != null)
+        /*if (sellingText != null)
             yield return StartCoroutine(TypeInfo(sellingText, sellingInfo.text));
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);*/
+        yield return new WaitUntil(() => nextAftermathStep);
 
         sellingAnim.SetActive(false);
         values.SetActive(false);
@@ -372,10 +381,12 @@ public class TutorialBudgetAlloc : MonoBehaviour
     {
         uwianAnim.SetActive(true);
 
-        if (uwianText != null)
+        /*if (uwianText != null)
             yield return StartCoroutine(TypeInfo(uwianText, uwianInfo.text));
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);*/
+
+        yield return new WaitUntil(() => nextAftermathStep);
 
         uwianAnim.SetActive(false);
         SceneManager.LoadScene("Chapter 1");
@@ -385,10 +396,12 @@ public class TutorialBudgetAlloc : MonoBehaviour
     {
         condoAnim.SetActive(true);
 
-        if (condoText != null)
+        /*if (condoText != null)
             yield return StartCoroutine(TypeInfo(condoText, condoInfo.text));
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);*/
+
+        yield return new WaitUntil(() => nextAftermathStep);
 
         condoAnim.SetActive(false);
         SceneManager.LoadScene("Chapter 1");
