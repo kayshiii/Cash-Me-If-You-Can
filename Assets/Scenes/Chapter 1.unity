@@ -5849,7 +5849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 573991431}
   m_Layer: 5
-  m_Name: Tutorial Sliders GO
+  m_Name: Budget Sliders GO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7555,8 +7555,8 @@ MonoBehaviour:
   finalTutorialDialogueLines: []
   tutorialLolaPromptLines: []
   speakerText: {fileID: 301046061}
-  lineDelay: 2.5
-  typeSpeed: 0.035
+  lineDelay: 0.5
+  typeSpeed: 0.001
   alexIcon: {fileID: 1813044520}
   parentsIcon: {fileID: 1994564127}
   momIcon: {fileID: 553668246}

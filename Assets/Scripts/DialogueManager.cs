@@ -62,12 +62,14 @@ public class DialogueManager : MonoBehaviour
     public DialogueLine[] chapter1DialogueBoyet;
     [Header("CH2 dia")]
     public DialogueLine[] chapter2Dialogue;
+    public DialogueLine[] finalChapter2Dialogue;
     [Header("CH3 dia")]
     public DialogueLine[] chapter3Intro;
     public DialogueLine[] chapter3Lola;
 
     [Header("Scripts")]
     public TutorialBudgetAlloc tutorialBudget;
+    public Chapter2Manager chapter2Manager;
     public Chapter3Manager chapter3Manager;
     public TutorialIntroManager introManager;
 
@@ -463,7 +465,6 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         yield return StartCoroutine(PlayDialogueSequence(chapter1DialogueBoyet));
 
-
         // When this finishes, show level report
         FindObjectOfType<Chapter1Manager>().LevelEndReport();
     }
@@ -517,7 +518,7 @@ public class DialogueManager : MonoBehaviour
                 yield return StartCoroutine(TypeLine(textBubText, chapter2Dialogue[i].text));
             }
 
-            yield return new WaitForSeconds(lineDelay);
+            //yield return new WaitForSeconds(lineDelay);
         }
 
         // === PHONE NOTIFICATION PART ===
@@ -538,7 +539,7 @@ public class DialogueManager : MonoBehaviour
 
         // === CONTINUE DIALOGUE ===
         // Play remaining dialogue (just "Wait lang, Boyet. BRB!")
-        for (int i = 3; i < chapter2Dialogue.Length; i++)
+        for (int i = 2; i < chapter2Dialogue.Length; i++)
         {
             string speaker = chapter2Dialogue[i].speaker.ToLower().Trim();
 
@@ -558,7 +559,7 @@ public class DialogueManager : MonoBehaviour
                 yield return StartCoroutine(TypeLine(textBubAlexText, chapter2Dialogue[i].text));
             }
 
-            yield return new WaitForSeconds(lineDelay);
+            //yield return new WaitForSeconds(lineDelay);
         }
 
         dialoguePanel.SetActive(false);
@@ -567,6 +568,20 @@ public class DialogueManager : MonoBehaviour
 
         // When this finishes, show budget panel
         FindObjectOfType<Chapter2Manager>().ShowBudgetPanel();
+    }
+
+    public void BeginChapter2EndDialogue()
+    {
+        StartCoroutine(PlayChapter2EndDialogueFlow());
+    }
+
+    private IEnumerator PlayChapter2EndDialogueFlow()
+    {
+        // Show dialogue for the chapter 2 ending
+        yield return StartCoroutine(PlayDialogueSequence(finalChapter2Dialogue));
+
+        // When dialogue is done, tell chapter2 manager to show the report
+        chapter2Manager.LevelEndReport();
     }
 
     // --- CHAPTER 2 END ---

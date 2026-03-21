@@ -74,15 +74,16 @@ public class Chapter2Manager : MonoBehaviour
 
     public void ProceedToCutscene()
     {
-        cutscenePanel.SetActive(true);
-        StartCoroutine(ShowCutsceneThenReport());
+        StartCoroutine(CutsceneThenDialogueThenReport());
     }
 
-    IEnumerator ShowCutsceneThenReport()
+    IEnumerator CutsceneThenDialogueThenReport()
     {
+        cutscenePanel.SetActive(true);
         yield return new WaitForSeconds(3f);
         cutscenePanel.SetActive(false);
-        LevelEndReport();
+        dialoguePanel.SetActive(true);
+        dialogueManager.BeginChapter2EndDialogue();
     }
 
     public void LevelEndReport()

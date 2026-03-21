@@ -8,8 +8,8 @@ public class Chapter1Manager : MonoBehaviour
     public CanvasGroup titleGroup;
     public GameObject bgImg;
     public GameObject dialoguePanel;
-    public float introDuration = 2f;
-    public float fadeDuration = 2f;
+    public float introDuration = 1f;
+    public float fadeDuration = 1f;
 
     public DialogueManager dialogueManager;
     public StatsUIUpdater statsUIUpdater;
@@ -71,7 +71,6 @@ public class Chapter1Manager : MonoBehaviour
         cg.alpha = to;
     }
 
-    // Called at end of intro dialogue
     public void ShowBudgetPanel()
     {
         statsUIUpdater.UpdateUI();
