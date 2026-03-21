@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Starting Game...");
-        SceneManager.LoadScene("Intro Screen");
+        SceneManager.LoadScene("Tutorial");
     }
 
     // Update is called once per frame

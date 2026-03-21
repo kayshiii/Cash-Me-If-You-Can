@@ -12,6 +12,7 @@ public class InfoLine
 
 public class TutorialBudgetAlloc : MonoBehaviour
 {
+    [Header("Sliders GO")]
     public GameObject sliderGameObj;
     public GameObject cashOnHand;
     public GameObject cashOnHandInfo;
@@ -23,7 +24,8 @@ public class TutorialBudgetAlloc : MonoBehaviour
     public GameObject lakwatsaBubble;
     public GameObject confirmButton;
 
-    public GameObject promptGameObj;
+    [Header("Stats GO")]
+    //public GameObject promptGameObj;
     public GameObject values;
     public GameObject social;
     public GameObject socialInfo;
@@ -38,14 +40,27 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
     public GameObject nextInfoIcon;
 
-    public GameObject choicesObject;
+    //public GameObject choicesObject;
+
+    [Header("Prompts")]
+    public GameObject choices;
+    public TextMeshProUGUI promptText;
+    public GameObject buttonsGO;
+    public TextMeshProUGUI finalPromptText;
+    public GameObject finalChoices;
+    public GameObject finalButtons;
+
+    [Header("Animation/Aftermaths")]
+    public GameObject uwianAnim;
+    public GameObject condoAnim;
     public GameObject staycationAnim;
     public GameObject savingAnim;
     public GameObject sellingAnim;
-
-    public GameObject choices;
-    public GameObject uwianAnim;
-    public GameObject condoAnim;
+    public TextMeshProUGUI staycationText;
+    public TextMeshProUGUI savingText;
+    public TextMeshProUGUI sellingText;
+    public TextMeshProUGUI uwianText;
+    public TextMeshProUGUI condoText;
 
     public DialogueManager dialogueManager;
     public GameManager gameManager;
@@ -61,8 +76,6 @@ public class TutorialBudgetAlloc : MonoBehaviour
     public TextMeshProUGUI iponInfoText;
     public TextMeshProUGUI dailyNeedsInfoText;
     public TextMeshProUGUI lakwatsaInfoText;
-
-    public TextMeshProUGUI promptText;
 
     public TextMeshProUGUI socialText;
     public TextMeshProUGUI happinessText;
@@ -84,6 +97,13 @@ public class TutorialBudgetAlloc : MonoBehaviour
     public InfoLine focusInfoText;
     public InfoLine budgetGoalInfoText;
     public InfoLine currentCashInfoText;
+
+    [Header("Animation/Aftermaths lines")]
+    public InfoLine staycationInfo;
+    public InfoLine savingInfo;
+    public InfoLine sellingInfo;
+    public InfoLine uwianInfo;
+    public InfoLine condoInfo;
 
     void Update()
     {
@@ -217,12 +237,26 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
         values.SetActive(false);
         sliderGameObj.SetActive(false);
-        promptGameObj.SetActive(true);
-        yield return StartCoroutine(TypeInfo(promptText, promptMessage.text));
-        //yield return new WaitForSeconds(3f);
+        dialogueManager.BeginLolaBudgetPrompt();
+    }
 
-        promptGameObj.SetActive(true);
-        choicesObject.SetActive(true);
+    public void ShowBudgetChoices()
+    {
+        StartCoroutine(ShowBudgetChoicesRoutine());
+    }
+
+    IEnumerator ShowBudgetChoicesRoutine()
+    {
+        if (choices != null)
+            choices.SetActive(true);
+
+        yield return StartCoroutine(TypeInfo(promptText, promptMessage.text));
+
+        // Optionally wait a bit, or remove this if you only want Space/click to control flow
+        // yield return new WaitForSeconds(0.5f);
+
+        if (buttonsGO != null)
+            buttonsGO.SetActive(true);
     }
 
     public void OnLakwatsaChoice()
@@ -233,7 +267,7 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
         GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
-        choicesObject.SetActive(false);
+        choices.SetActive(false);
         StartCoroutine(StaycationAftermath());
     }
 
@@ -244,7 +278,7 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
         GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
-        choicesObject.SetActive(false);
+        choices.SetActive(false);
         StartCoroutine(SavingAftermath());
     }
 
@@ -255,42 +289,49 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
         GameManager.Instance.previousLevelRemainingCash = GameManager.Instance.budget;
 
-        choicesObject.SetActive(false);
+        choices.SetActive(false);
         StartCoroutine(SellingAftermath());
     }
 
     IEnumerator StaycationAftermath()
     {
         staycationAnim.SetActive(true);
+
+        if (staycationText != null)
+            yield return StartCoroutine(TypeInfo(staycationText, staycationInfo.text));
+        
         yield return new WaitForSeconds(2f);
 
         staycationAnim.SetActive(false);
         values.SetActive(false);
-        promptGameObj.SetActive(false);
         dialogueManager.BeginFinalTutorialDialogue();
     }
 
     IEnumerator SavingAftermath()
     {
         savingAnim.SetActive(true);
-        Debug.Log("Playing saving aftermath animation");
+
+        if (savingText != null)
+            yield return StartCoroutine(TypeInfo(savingText, savingInfo.text));
+
         yield return new WaitForSeconds(2f);
-        Debug.Log("done saving aftermath animation");
 
         savingAnim.SetActive(false);
         values.SetActive(false);
-        promptGameObj.SetActive(false);
         dialogueManager.BeginFinalTutorialDialogue();
     }
 
     IEnumerator SellingAftermath()
     {
         sellingAnim.SetActive(true);
-        yield return new WaitForSeconds(2f);
+
+        if (sellingText != null)
+            yield return StartCoroutine(TypeInfo(sellingText, sellingInfo.text));
+
+        yield return new WaitForSeconds(1.5f);
 
         sellingAnim.SetActive(false);
         values.SetActive(false);
-        promptGameObj.SetActive(false);
         dialogueManager.BeginFinalTutorialDialogue();
     }
 
@@ -301,17 +342,17 @@ public class TutorialBudgetAlloc : MonoBehaviour
 
     IEnumerator ShowPromptFinal()
     {
-        promptGameObj.SetActive(true);
-        yield return StartCoroutine(TypeInfo(promptText, finalPromptMessage.text));
-        yield return new WaitForSeconds(4f);
+        //promptGameObj.SetActive(true);
+        finalChoices.SetActive(true);
+        yield return StartCoroutine(TypeInfo(finalPromptText, finalPromptMessage.text));
+        yield return new WaitForSeconds(1.5f);
 
-        choices.SetActive(true);
+        finalButtons.SetActive(true);
     }
 
     public void OnUwianChoice()
     {
         choices.SetActive(false);
-        promptGameObj.SetActive(false);
         GameManager.Instance.chosenResidence = GameManager.ResidenceType.Uwian;
         Debug.Log("Uwian chosen, budget set to 15000");
 
@@ -321,7 +362,6 @@ public class TutorialBudgetAlloc : MonoBehaviour
     public void OnCondoChoice()
     {
         choices.SetActive(false);
-        promptGameObj.SetActive(false);
         GameManager.Instance.chosenResidence = GameManager.ResidenceType.Condo;
         Debug.Log("Condo chosen, budget set to 24000");
 
@@ -331,7 +371,11 @@ public class TutorialBudgetAlloc : MonoBehaviour
     IEnumerator UwianTransition()
     {
         uwianAnim.SetActive(true);
-        yield return new WaitForSeconds(2f);
+
+        if (uwianText != null)
+            yield return StartCoroutine(TypeInfo(uwianText, uwianInfo.text));
+
+        yield return new WaitForSeconds(1.5f);
 
         uwianAnim.SetActive(false);
         SceneManager.LoadScene("Chapter 1");
@@ -340,7 +384,11 @@ public class TutorialBudgetAlloc : MonoBehaviour
     IEnumerator CondoTransition()
     {
         condoAnim.SetActive(true);
-        yield return new WaitForSeconds(2f);
+
+        if (condoText != null)
+            yield return StartCoroutine(TypeInfo(condoText, condoInfo.text));
+
+        yield return new WaitForSeconds(1.5f);
 
         condoAnim.SetActive(false);
         SceneManager.LoadScene("Chapter 1");

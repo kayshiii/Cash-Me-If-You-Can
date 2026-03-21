@@ -13,10 +13,13 @@ public class DialogueLine
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Tutorial Lines")]
     public GameObject dialoguePanel;
     public DialogueLine[] tutorialDialogueLines;
     public DialogueLine[] tutorialLolaLines;
     public DialogueLine[] finalTutorialDialogueLines;
+    public DialogueLine[] tutorialLolaPromptLines;
+
     public TextMeshProUGUI speakerText;
     //public TextMeshProUGUI dialogueText;
 
@@ -28,7 +31,7 @@ public class DialogueManager : MonoBehaviour
     private bool lineFinished = false;
     private bool proceedToNextLine = false;
 
-    // character icons
+    [Header("Char Icons")]
     public GameObject alexIcon;
     public GameObject parentsIcon;
     public GameObject momIcon;
@@ -36,13 +39,13 @@ public class DialogueManager : MonoBehaviour
     public GameObject boyetIcon;
     public GameObject lolaIcon;
 
-    // text bubbles
+    [Header("Text Bubbles")]
     public GameObject textBubAlex;
     public TextMeshProUGUI textBubAlexText;
     public GameObject textBub;
     public TextMeshProUGUI textBubText;
 
-    //pop up
+    [Header("PopUp")]
     public GameObject popupPanel;
     public GameObject moneyIcon;
     public TextMeshProUGUI popUpText;
@@ -54,15 +57,16 @@ public class DialogueManager : MonoBehaviour
     public GameObject phoneNotificationPanel;
     public AudioSource notificationSound;
 
-    // Chapter 1 Dialogues
+    [Header("CH1 dia")]
     public DialogueLine[] chapter1DialogueIntro;
     public DialogueLine[] chapter1DialogueBoyet;
-    // Chapter 2 Dialogues
+    [Header("CH2 dia")]
     public DialogueLine[] chapter2Dialogue;
-    // Chapter 2 Dialogues
+    [Header("CH3 dia")]
     public DialogueLine[] chapter3Intro;
     public DialogueLine[] chapter3Lola;
 
+    [Header("Scripts")]
     public TutorialBudgetAlloc tutorialBudget;
     public Chapter3Manager chapter3Manager;
     public TutorialIntroManager introManager;
@@ -416,6 +420,21 @@ public class DialogueManager : MonoBehaviour
 
         // hide again right after consuming the input
         if (nextIcon != null) nextIcon.SetActive(false);
+    }
+
+    public void BeginLolaBudgetPrompt()
+    {
+        StartCoroutine(LolaBudgetPromptFlow());
+    }
+
+    IEnumerator LolaBudgetPromptFlow()
+    {
+        dialoguePanel.SetActive(true);
+        yield return StartCoroutine(PlayDialogueSequence(tutorialLolaPromptLines));
+        dialoguePanel.SetActive(false);
+
+        // After Lola finishes, show the choices
+        tutorialBudget.ShowBudgetChoices();
     }
 
     // --- CHAPTER 1 ---
