@@ -45,7 +45,8 @@ public class SpendingScreenManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public Chapter1Manager chapter1Manager;
     public Chapter2Manager chapter2Manager;
-    public GenericLevelManager genericLevel;
+    public Chapter4Manager chapter4Manager;
+    public Chapter5Manager chapter5Manager;
 
 
     void Start()
@@ -210,7 +211,11 @@ public class SpendingScreenManager : MonoBehaviour
         }
         else if (GameManager.Instance.currentChapter == 4)
         {
-            genericLevel.ProceedToCutscene();
+            chapter4Manager.ProceedToCutscene();
+        }
+        else if (GameManager.Instance.currentChapter == 5)
+        {
+            chapter5Manager.ProceedAfterBudget5();
         }
         // Add more chapters as needed
 
