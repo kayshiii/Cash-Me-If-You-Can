@@ -21,6 +21,7 @@ public class SpendingScreenManager : MonoBehaviour
     private int cartTotal = 0;
     private int dailyNeedsAvailable = 0;
 
+    [Header("Texts")]
     public TextMeshProUGUI dailyNeedsText;
     public TextMeshProUGUI cartCountText;
 
@@ -29,6 +30,7 @@ public class SpendingScreenManager : MonoBehaviour
     public GridLayoutGroup itemGrid;        // Assign the grid container
     public Button itemButtonPrefab;         // Assign a button prefab
 
+    [Header("Panels")]
     public GameObject checkOutPanel;
     public GameObject spendingPanel;
 
@@ -41,12 +43,14 @@ public class SpendingScreenManager : MonoBehaviour
     private Dictionary<SpendingItem, bool> itemSelected = new Dictionary<SpendingItem, bool>();
     private Dictionary<Button, SpendingItem> buttonToItem = new Dictionary<Button, SpendingItem>();
 
+    [Header("Scripts")]
     public GameObject cutscenePanel;
     public DialogueManager dialogueManager;
     public Chapter1Manager chapter1Manager;
     public Chapter2Manager chapter2Manager;
     public Chapter4Manager chapter4Manager;
     public Chapter5Manager chapter5Manager;
+    public Chapter6Manager chapter6Manager;
 
 
     void Start()
@@ -216,6 +220,10 @@ public class SpendingScreenManager : MonoBehaviour
         else if (GameManager.Instance.currentChapter == 5)
         {
             chapter5Manager.ProceedAfterBudget5();
+        }
+        else if (GameManager.Instance.currentChapter == 6)
+        {
+            chapter6Manager.ProceedAfterBudget6();
         }
         // Add more chapters as needed
 

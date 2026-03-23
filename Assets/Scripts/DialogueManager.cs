@@ -51,6 +51,11 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI popUpText;
     public float moneyPopupDuration = 2f;
 
+    [Header("PopUp")]
+    public GameObject popup1Panel;
+    public TextMeshProUGUI popUp1Text;
+    public float popupDuration = 1.5f;
+
     //next icon
     public GameObject nextIcon;
 
@@ -150,6 +155,33 @@ public class DialogueManager : MonoBehaviour
                 popupPanel.SetActive(false);
                 moneyIcon.SetActive(false);
                 popUpText.gameObject.SetActive(false);
+
+                continue; // Skip normal dialogue handling for this line
+            }
+            if (speaker == "system")
+            {
+                popup1Panel.SetActive(true);
+                popUp1Text.gameObject.SetActive(true);
+
+                popupPanel.SetActive(false);
+                alexIcon.SetActive(false);
+                parentsIcon.SetActive(false);
+                momIcon.SetActive(false);
+                dadIcon.SetActive(false);
+                boyetIcon.SetActive(false);
+                lolaIcon.SetActive(false);
+
+                textBubAlexText.gameObject.SetActive(false);
+                textBubAlex.SetActive(false);
+                textBubText.gameObject.SetActive(false);
+                textBub.SetActive(false);
+
+                popUpText.text = dialogueSequence[i].text;
+                //popUpText.text = "";
+
+                yield return new WaitForSeconds(popupDuration);
+                popup1Panel.SetActive(false);
+                popUp1Text.gameObject.SetActive(false);
 
                 continue; // Skip normal dialogue handling for this line
             }
