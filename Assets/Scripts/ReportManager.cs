@@ -41,6 +41,16 @@ public class ReportManager : MonoBehaviour
     public void OnContinueClicked()
     {
         Time.timeScale = 1f;
+
+        // 1) ENDING CONDITION HERE
+        if (GameManager.Instance.happiness <= 0 ||
+            GameManager.Instance.social <= 0 ||
+            GameManager.Instance.focus <= 0)
+        {
+            SceneManager.LoadScene("BadEnding");
+            return;
+        }
+
         // Check current chapter and load next
         if (GameManager.Instance.currentChapter == 1)
         {
