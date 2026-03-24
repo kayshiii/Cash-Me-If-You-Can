@@ -97,5 +97,10 @@ public class ReportManager : MonoBehaviour
             GameManager.Instance.currentChapter = 10;
             SceneManager.LoadScene("Chapter 10"); // when you create it
         }
+        else if (GameManager.Instance.currentChapter == 10)
+        {
+            GameManager.Instance.currentChapter = 11;
+            SceneManager.LoadScene("Chapter 11"); // when you create it
+        }
     }
 }
