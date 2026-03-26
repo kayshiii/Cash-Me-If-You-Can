@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Chapter12Manager : MonoBehaviour
+public class Chapter13Manager : MonoBehaviour
 {
     [Header("Intro")]
     public CanvasGroup titleGroup;
@@ -14,12 +14,19 @@ public class Chapter12Manager : MonoBehaviour
 
     [Header("Panels")]
     public GameObject budgetPanel;
-    public GameObject cutsceneIntroPanel;   // first cutscene
-    public GameObject cutsceneEndPanel;     // final cutscene
+    public GameObject cutsceneIntroPanel;        // first cutscene
+    public GameObject cutsceneAfterEventPanel;   // cutscene after random event
     public GameObject reportPanel;
 
+    [Header("Random Event Prompt")]
+    public GameObject randomEventPanel;
+    public TMPro.TextMeshProUGUI randomEventText;
+    [TextArea(2, 5)]
+    public string randomEventMessage;
+    public GameObject randomEventButtons;
+
     [Header("Cutscene Next Button")]
-    public GameObject cutsceneNextButton;   // reused for both cutscenes
+    public GameObject cutsceneNextButton;        // reused for both cutscenes
 
     [Header("Scripts")]
     public DialogueManager dialogueManager;
@@ -27,12 +34,12 @@ public class Chapter12Manager : MonoBehaviour
     public BudgetPanelManager budgetPanelManager;
 
     [Header("Dialogue Sequences")]
-    public DialogueLine[] chapter12IntroLines;   // intro dialogue
-    public DialogueLine[] chapter12MidLines;     // mid dialogue (after budget)
-    public DialogueLine[] chapter12FinalLines;     // mid dialogue (after budget)
+    public DialogueLine[] chapter13IntroLines;   // intro dialogue
+    public DialogueLine[] chapter13MidLines;     // mid dialogue (after budget)
 
     private bool nextCutsceneStep = false;
 
+    // === Buttons ===
     public void OnCutsceneNextButton()
     {
         nextCutsceneStep = true;
@@ -41,13 +48,13 @@ public class Chapter12Manager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.currentChapter = 12;
+        GameManager.Instance.currentChapter = 13;
 
         int budgetPerLevel = (GameManager.Instance.chosenResidence == GameManager.ResidenceType.Condo) ? 24000 : 15000;
         int startingBudget = budgetPerLevel + GameManager.Instance.previousLevelRemainingCash;
         GameManager.Instance.SetBudget(startingBudget);
 
-        Debug.Log($"[Level Start] Chapter 12, Budget: {startingBudget}");
+        Debug.Log($"[Level Start] Chapter 13, Budget: {startingBudget}");
 
         budgetPanelManager.InitializeSlidersToBudget();
         statsUIUpdater.UpdateUI();
@@ -77,12 +84,12 @@ public class Chapter12Manager : MonoBehaviour
         // 2) Intro dialogue
         bgImg.SetActive(true);
         dialoguePanel.SetActive(true);
-        yield return StartCoroutine(dialogueManager.PlayDialogueSequence(chapter12IntroLines));
+        yield return StartCoroutine(dialogueManager.PlayDialogueSequence(chapter13IntroLines));
         dialoguePanel.SetActive(false);
 
         // 3) Budget screen
         ShowBudgetPanel();
-        // Wait for BudgetPanelManager to call ProceedAfterBudget12()
+        // Wait for BudgetPanelManager to call ProceedAfterBudget13()
     }
 
     void ShowBudgetPanel()
@@ -91,8 +98,8 @@ public class Chapter12Manager : MonoBehaviour
         budgetPanel.SetActive(true);
     }
 
-    // Called by BudgetPanelManager when Chapter 12 budget is confirmed
-    public void ProceedAfterBudget12()
+    // === Called by BudgetPanelManager when Chapter 13 budget is confirmed ===
+    public void ProceedAfterBudget13()
     {
         StartCoroutine(AfterBudgetFlow());
     }
@@ -103,21 +110,60 @@ public class Chapter12Manager : MonoBehaviour
 
         // 4) Mid dialogue
         dialoguePanel.SetActive(true);
-        yield return StartCoroutine(dialogueManager.PlayDialogueSequence(chapter12MidLines));
+        yield return StartCoroutine(dialogueManager.PlayDialogueSequence(chapter13MidLines));
         dialoguePanel.SetActive(false);
 
-        // 5) Final cutscene
-        cutsceneEndPanel.SetActive(true);
+        // 5) Random event prompt
+        ShowRandomEventPrompt();
+        // Flow continues from choice handlers → ContinueAfterRandomEvent()
+    }
+
+    void ShowRandomEventPrompt()
+    {
+        if (randomEventPanel != null)
+            randomEventPanel.SetActive(true);
+
+        if (randomEventText != null)
+            randomEventText.text = randomEventMessage;
+
+        if (randomEventButtons != null)
+            randomEventButtons.SetActive(true);
+    }
+
+    // === Random event choices (examples; tweak for story/stats) ===
+    public void OnRandomEventChoiceStart()
+    {
+        GameManager.Instance.AddFocus(-15);
+        GameManager.Instance.AddHappiness(-10);
+        CloseRandomEventAndContinue();
+    }
+
+    public void OnRandomEventChoiceDelay()
+    {
+        GameManager.Instance.AddFocus(-10);
+        GameManager.Instance.AddHappiness(-10);
+        CloseRandomEventAndContinue();
+    }
+
+    void CloseRandomEventAndContinue()
+    {
+        if (randomEventButtons != null)
+            randomEventButtons.SetActive(false);
+        if (randomEventPanel != null)
+            randomEventPanel.SetActive(false);
+
+        StartCoroutine(ContinueAfterRandomEvent());
+    }
+
+    IEnumerator ContinueAfterRandomEvent()
+    {
+        // 6) Cutscene after random event
+        cutsceneAfterEventPanel.SetActive(true);
         if (cutsceneNextButton != null) cutsceneNextButton.SetActive(true);
         nextCutsceneStep = false;
         yield return new WaitUntil(() => nextCutsceneStep);
         if (cutsceneNextButton != null) cutsceneNextButton.SetActive(false);
-        cutsceneEndPanel.SetActive(false);
-
-        // 6) Final dialogue (new)
-        dialoguePanel.SetActive(true);
-        yield return StartCoroutine(dialogueManager.PlayDialogueSequence(chapter12FinalLines));
-        dialoguePanel.SetActive(false);
+        cutsceneAfterEventPanel.SetActive(false);
 
         // 7) Report
         LevelEndReport();
@@ -126,7 +172,7 @@ public class Chapter12Manager : MonoBehaviour
     public void LevelEndReport()
     {
         reportPanel.SetActive(true);
-        Debug.Log("Chapter 12 complete. Showing post-level report.");
+        Debug.Log("Chapter 13 complete. Showing post-level report.");
     }
 
     IEnumerator Fade(CanvasGroup cg, float from, float to, float duration)

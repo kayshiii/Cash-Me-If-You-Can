@@ -459,11 +459,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Another school year done.\r\n\r\nShe thinks about everything \u2014 late
-    nights, new friends, small wins, and quiet failures. So much has changed, but
-    somehow, she\u2019s still standing. Stronger. Wiser. Maybe even a little braver.\r\n\r\nAs
-    she walks out with her bag, the halls feel familiar yet new again. One more chapter
-    closed \u2014 and a new one waiting, just ahead"
+  m_text: "While others are still relaxing after class, Alex opens her laptop and
+    starts outlining her research topic. The document is blank at first, but the
+    ideas come slowly \u2014 methodically. It feels good to be ahead, even just a
+    little.\r\n\r\nIf she starts early, the workload feels lighter later. There\u2019s
+    more time to refine, revise, and breathe \u2014 though it means sacrificing a
+    few nights out and spare moments of rest.\r\n\r\nIf she waits, she enjoys her
+    free time now but pays for it later, deadlines closing in faster than expected.
+    Either way, she learns a familiar lesson: progress always asks for something
+    in return \u2014 sometimes time, sometimes comfort"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -2519,7 +2523,7 @@ GameObject:
   - component: {fileID: 290064263}
   - component: {fileID: 290064262}
   m_Layer: 5
-  m_Name: rest Button
+  m_Name: Delay Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2603,9 +2607,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter11Manager, Assembly-CSharp
-        m_MethodName: OnRandomEventChoiceSkip
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter13Manager, Assembly-CSharp
+        m_MethodName: OnRandomEventChoiceDelay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2933,7 +2937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NAH
+  m_text: DELAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -3622,11 +3626,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You saw an online course that can enhance your skill set.
+  m_text: 'It''s now the start of junior year and thesis is coming up.
 
 
-    Should
-    you enroll?'
+    What
+    will you do?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -4117,7 +4121,7 @@ GameObject:
   - component: {fileID: 505323015}
   - component: {fileID: 505323014}
   m_Layer: 5
-  m_Name: Enroll Button
+  m_Name: Start Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4201,9 +4205,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter11Manager, Assembly-CSharp
-        m_MethodName: OnRandomEventChoiceEnroll
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter13Manager, Assembly-CSharp
+        m_MethodName: OnRandomEventChoiceStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4856,7 +4860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'chapter 2: Soph Year'
+  m_text: 'chapter 3: Junior Year'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -4883,8 +4887,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 152.6
-  m_fontSizeBase: 152.6
+  m_fontSize: 145
+  m_fontSizeBase: 145
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5289,7 +5293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &651020357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5706,7 +5710,7 @@ GameObject:
   - component: {fileID: 730995293}
   - component: {fileID: 730995294}
   m_Layer: 0
-  m_Name: Chapter 12 Manager
+  m_Name: Chapter 13 Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5736,7 +5740,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 730995291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188a7c7726df7dc44882ac788f1e8479, type: 3}
+  m_Script: {fileID: 11500000, guid: ae3fbf9fbebed314caf98b029a81958a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleGroup: {fileID: 2124756469}
@@ -5746,36 +5750,36 @@ MonoBehaviour:
   dialoguePanel: {fileID: 251754735}
   budgetPanel: {fileID: 573991430}
   cutsceneIntroPanel: {fileID: 1245147077}
-  cutsceneEndPanel: {fileID: 254238414}
+  cutsceneAfterEventPanel: {fileID: 254238414}
   reportPanel: {fileID: 1766758103}
+  randomEventPanel: {fileID: 1963076208}
+  randomEventText: {fileID: 385449470}
+  randomEventMessage: 'It''s now the start of junior year and thesis is coming up.
+
+
+    What
+    will you do?'
+  randomEventButtons: {fileID: 858835343}
   cutsceneNextButton: {fileID: 0}
   dialogueManager: {fileID: 761087731}
   statsUIUpdater: {fileID: 1214783317}
   budgetPanelManager: {fileID: 196063083}
-  chapter12IntroLines:
-  - speaker: boyet
-    text: Tapos na naman isang taon
-  - speaker: boyet
-    text: Bilis no?
+  chapter13IntroLines:
   - speaker: alex
-    text: Oo nga eh
+    text: Junior year na
   - speaker: alex
-    text: Parang mas mabilis na ang oras habang tumatagal
+    text: Sabi nila dito na talaga nagiging seryoso ang college
   - speaker: boyet
-    text: O baka tumatanda lang tayo
-  - speaker: alex
-    text: Hoy sophomore pa lang tayo
+    text: Totoo yan
   - speaker: popup
     text: Allowance Received
-  chapter12MidLines:
+  chapter13MidLines:
+  - speaker: boyet
+    text: "Hayy dito na rin nagsisimula ang \u201Cpuyat era\""
   - speaker: alex
-    text: Pero parang kahit papaano, mas kampante na ako sa pag-manage ng pera ko
-  chapter12FinalLines:
-  - speaker: system
-    text: 'END OF SOPH YEAR!
-
-
-      Chapter 3 Unlocked!'
+    text: Kala ko nagsimula na yun freshman pa lang
+  - speaker: boyet
+    text: Practice lang yun
 --- !u!1 &747445684
 GameObject:
   m_ObjectHideFlags: 0
@@ -7192,7 +7196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &943511229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7915,7 +7919,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730995294}
-        m_TargetAssemblyTypeName: Chapter12Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Chapter13Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -8691,12 +8695,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The last bell rings, and the sound of shuffling papers fills the room.
-    Alex exhales deeply, finally setting her pen down. Days of sleepless reviews
-    and endless notes \u2014 done, at least for now. Outside, the campus feels lighter,
-    laughter echoing from every corner.\r\n\r\nShe walks toward the gate, sunshine
-    warming her face. Whether she aced it or not doesn\u2019t matter for a moment.
-    What matters is that it\u2019s over \u2014 and she survived. Tomorrow can wait"
+  m_text: "It\u2019s a new start \u2014 same campus, same routine, but she feels
+    different now. More grounded. More aware of what it takes to keep going. As she
+    starts writing her first notes of the year, a quiet smile forms. Junior year\u2026
+    time to level up"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -9245,7 +9247,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730995294}
-        m_TargetAssemblyTypeName: Chapter12Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Chapter13Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -9689,7 +9691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: -150.82}
+  m_AnchoredPosition: {x: 89, y: -150.82}
   m_SizeDelta: {x: 1617.7, y: 206.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317903394
@@ -9712,7 +9714,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level 12:'
+  m_text: 'Level 13: Back to Reality'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -10174,7 +10176,8 @@ MonoBehaviour:
   chapter9Manager: {fileID: 0}
   chapter10Manager: {fileID: 0}
   chapter11Manager: {fileID: 0}
-  chapter12Manager: {fileID: 730995294}
+  chapter12Manager: {fileID: 0}
+  chapter13Manager: {fileID: 730995294}
 --- !u!1 &1346065931
 GameObject:
   m_ObjectHideFlags: 0
@@ -11999,7 +12002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1571331176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12175,7 +12178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a29d7778301c6084b91d652c1db5ecce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f18bee53bcc143844a7bf5537cd53288, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12325,7 +12328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENROLL !
+  m_text: START NOW
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -14049,7 +14052,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: quick dinner invite
+  m_text: Start Research early?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -14568,7 +14571,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Makakatulong sa future, but comes with a price
+  m_text: Baka masyado pa maaga at nag worry lang ako
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
   m_sharedMaterial: {fileID: 1872093117317676585, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
