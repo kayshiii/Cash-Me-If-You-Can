@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro Screen.unity
     guid: 908b0987e71afd14f8d97dd1c67a6e94
   - enabled: 1
-    path: Assets/Scenes/BadEnding.unity
+    path: Assets/Scenes/Bad Ending.unity
     guid: c2b28a2240b5ca44c93d3b29e0517813
+  - enabled: 1
+    path: Assets/Scenes/Bad Ending 1.unity
+    guid: 3e1f4f8c28c2c9547a96530b0cb93f7c
+  - enabled: 1
+    path: Assets/Scenes/Good Ending.unity
+    guid: 1696105b085efbc4983b3ebe249f66fe
   - enabled: 1
     path: Assets/Scenes/ToBeContinued.unity
     guid: 030499e9ea753fb4b91481d5186446f3
@@ -92,6 +98,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CH or LVL4/Chapter 24.unity
     guid: bd9e22c00ca3bd54483ed60526554947
+  - enabled: 1
+    path: Assets/Scenes/CH or LVL4/Chapter 25.unity
+    guid: af6a2e9577bacc646b4cdbfdac53c436
+  - enabled: 1
+    path: Assets/Scenes/CH or LVL4/Chapter 26.unity
+    guid: af727ca3e82d32a49908516203f6d9ab
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

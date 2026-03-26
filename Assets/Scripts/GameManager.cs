@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -132,5 +133,84 @@ public class GameManager : MonoBehaviour
         focus = newFocus;
         ipon = newIpon;
         Debug.Log($"[SetStats] Budget: {budget}, Happiness: {happiness}, Social: {social}, Focus: {focus}, Ipon: {ipon}");
+    }
+
+    public enum EndingType
+    {
+        None,
+        Good,      // Graduate + ipon goal met
+        BadIpon,   // Graduate but ipon goal failed
+        GameOver   // Stat depletion
+    }
+
+    public EndingType currentEnding = EndingType.None;
+
+    public int iponGoal = 80000;
+
+    public void EvaluateEndingAtFinalChapter()
+    {
+        // Lose #2: auto Game Over from stat depletion
+        if (happiness <= 0 || social <= 0 || focus <= 0)
+        {
+            currentEnding = EndingType.GameOver;
+            return;
+        }
+
+        // Assume chapter 26 is graduation
+        bool isGraduated = (currentChapter >= 26);
+
+        if (isGraduated)
+        {
+            if (ipon >= iponGoal)
+                currentEnding = EndingType.Good;     // Win condition
+            else
+                currentEnding = EndingType.BadIpon;  // Lose #1
+        }
+        else
+        {
+            currentEnding = EndingType.None;
+        }
+    }
+
+    public void GoToNextOrEnding()
+    {
+        Time.timeScale = 1f;
+
+        // Check auto Game Over any time (Lose #2)
+        if (happiness <= 0 || social <= 0 || focus <= 0)
+        {
+            currentEnding = EndingType.GameOver;
+            SceneManager.LoadScene("BadEnding");   // your Lose #2 scene
+            return;
+        }
+
+        // If not yet at final chapter, just go to next chapter as usual
+        if (currentChapter < 26)
+        {
+            currentChapter++;
+            string nextSceneName = "Chapter " + currentChapter;
+            SceneManager.LoadScene(nextSceneName);
+            return;
+        }
+
+        // Final chapter: decide ending
+        EvaluateEndingAtFinalChapter();
+
+        switch (currentEnding)
+        {
+            case EndingType.Good:
+                SceneManager.LoadScene("Good Ending");      // Win
+                break;
+            case EndingType.BadIpon:
+                SceneManager.LoadScene("Bad Ending 1");   // Lose #1
+                break;
+            case EndingType.GameOver:
+                SceneManager.LoadScene("Bad Ending");       // Lose #2 (redundant safety)
+                break;
+            default:
+                // Fallback if something went wrong
+                SceneManager.LoadScene("Good Ending");
+                break;
+        }
     }
 }

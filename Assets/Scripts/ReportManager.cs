@@ -42,7 +42,7 @@ public class ReportManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        // 1) ENDING CONDITION HERE
+        /*// 1) ENDING CONDITION HERE
         if (GameManager.Instance.happiness <= 0 ||
             GameManager.Instance.social <= 0 ||
             GameManager.Instance.focus <= 0)
@@ -172,9 +172,11 @@ public class ReportManager : MonoBehaviour
             GameManager.Instance.currentChapter = 25;
             SceneManager.LoadScene("Chapter 25");
         }
-        else if (GameManager.Instance.currentChapter == 25)
+        *//*else if (GameManager.Instance.currentChapter == 25)
         {
             SceneManager.LoadScene("ToBeContinued");   // your “to be continued” screen
-        }
+        }*/
+
+        GameManager.Instance.GoToNextOrEnding();
     }
 }
