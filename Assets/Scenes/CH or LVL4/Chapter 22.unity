@@ -459,13 +459,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Her wallet feels lighter, but her heart feels full. Every side hustle,
-    saved coin, and sacrifice led to this moment. It\u2019s not easy knowing how
-    much it cost, literally and figuratively \u2014 but she tells herself it\u2019s
-    worth every peso.\r\n\r\nAs she walks out of the office, receipt in hand, the
-    campus breeze feels different. Heavy and freeing all at once. Graduation isn\u2019t
-    just about finishing \u2014 it\u2019s proof she made it, one payment, one effort
-    at a time"
+  m_text: "The gym buzzes with chatter and flashing company logos. Rows of booths
+    line the walls \u2014 tech firms, banks, NGOs \u2014 each with smiling recruiters
+    and stacks of flyers. Alex clutches her folder of r\xE9sum\xE9s, trying to steady
+    her nerves.\r\n\r\nThe air smells faintly of coffee and ambition. Everywhere
+    she turns, someone\u2019s introducing themselves, handing out calling cards,
+    talking about \u201Ccareer paths.\u201D She walks slowly through the crowd, the
+    future suddenly feeling real \u2014 close enough to touch, but still a little
+    out of reach.\r\n\r\nFor the first time, Alex isn\u2019t just a student \u2014
+    she\u2019s a soon\u2011to\u2011be professional, ready or not"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -1601,6 +1603,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &212388488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212388489}
+  - component: {fileID: 212388491}
+  - component: {fileID: 212388490}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &212388489
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212388488}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2102169037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &212388490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212388488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &212388491
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212388488}
+  m_CullTransparentMesh: 1
 --- !u!1 &216838184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,7 +3906,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 730995294}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Chapter21Manager, Assembly-CSharp
         m_MethodName: OnRandomEventChoicePay
         m_Mode: 1
@@ -5295,7 +5372,7 @@ GameObject:
   - component: {fileID: 730995293}
   - component: {fileID: 730995294}
   m_Layer: 0
-  m_Name: Chapter 21 Manager
+  m_Name: Chapter 22 Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5325,7 +5402,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 730995291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf85185814f84a4292389aee9124ace, type: 3}
+  m_Script: {fileID: 11500000, guid: 05c1aeb360c868c4b87c25012aec83b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleGroup: {fileID: 2124756469}
@@ -5335,34 +5412,32 @@ MonoBehaviour:
   dialoguePanel: {fileID: 251754735}
   budgetPanel: {fileID: 573991430}
   cutsceneIntroPanel: {fileID: 1245147077}
-  cutsceneAfterEventPanel: {fileID: 254238414}
+  cutsceneEndPanel: {fileID: 254238414}
   reportPanel: {fileID: 1766758103}
-  randomEventPanel: {fileID: 1963076208}
-  randomEventText: {fileID: 385449470}
-  randomEventMessage: "This is now the final push to graduating. \nUnfortunately
-    this comes with a price. But congratulations!"
-  randomEventButtons: {fileID: 858835343}
   cutsceneNextButton: {fileID: 0}
   dialogueManager: {fileID: 761087731}
   statsUIUpdater: {fileID: 1214783317}
   budgetPanelManager: {fileID: 196063083}
-  chapter21IntroLines:
+  chapter22IntroLines:
+  - speaker: alex
+    text: Wow ang daming booths!
+  - speaker: alex
+    text: Ito siguro start ng adult life
   - speaker: popup
     text: Allowance Received
-  chapter21MidLines:
-  - speaker: alex
-    text: Ang mahal pala magtapos
-  - speaker: alex
-    text: "Toga, photoshoot, yearbook\u2026"
+  chapter22MidLines:
   - speaker: boyet
-    text: May bayad pala ang pagiging graduate
+    text: Alex, tara sa job fair!
   - speaker: alex
-    text: Oo
+    text: Gusto ko rin pumunta
+  - speaker: alex
+    text: Baka may opportunity
   - speaker: boyet
-    text: Akala ko libre lang yung diploma
-  chapter21FinalLines:
-  - speaker: lola mom
-    text: Ito na yunng huling malaking gastos bago ang P80,000 goal mo
+    text: At freebies
+  - speaker: alex
+    text: "Boyet\u2026"
+  - speaker: boyet
+    text: Networking nga eh
 --- !u!1 &747445684
 GameObject:
   m_ObjectHideFlags: 0
@@ -7998,8 +8073,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter19Manager, Assembly-CSharp
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter22Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -8812,14 +8887,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "On her way across campus, Alex stops in front of a new poster on the bulletin
-    board \u2014 \u201CApplication for Graduation Now Open.\u201D The words hit harder
-    than she expects. She reads them again, tracing the bold letters with her eyes.\r\n\r\nIt\u2019s
-    finally happening \u2014 the moment she\u2019s spent years preparing for. Excitement
-    and disbelief mix together as she takes a photo of the poster. Deadlines, thesis
-    stress, sleepless nights \u2014 all of it suddenly feels worth it.\r\n\r\nShe
-    takes a deep breath, smiling faintly. One more step. After everything, she\u2019s
-    almost there"
+  m_text: "From the hallway, Alex catches sight of the bustling gym filled with colorful
+    booths and lively chatter. Recruiters shake hands, students swap r\xE9sum\xE9s,
+    and banners advertise opportunities that sound both exciting and intimidating.\r\nShe
+    pauses by the doorway, clutching her bag a little tighter. It\u2019s not her
+    turn yet \u2014 but soon, it will be. The noise, the crowd, the future \u2014
+    all waiting for her on the other side of those doors."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -9367,8 +9440,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter19Manager, Assembly-CSharp
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter22Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -10084,7 +10157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49, y: -150.82}
+  m_AnchoredPosition: {x: 318, y: -150.82}
   m_SizeDelta: {x: 1617.7, y: 206.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317903394
@@ -10107,7 +10180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level 21:'
+  m_text: 'Level 22: Job Fair'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -10578,7 +10651,8 @@ MonoBehaviour:
   chapter18Manager: {fileID: 0}
   chapter19Manager: {fileID: 0}
   chapter20Manager: {fileID: 0}
-  chapter21Manager: {fileID: 730995294}
+  chapter21Manager: {fileID: 0}
+  chapter22Manager: {fileID: 730995294}
 --- !u!1 &1346065931
 GameObject:
   m_ObjectHideFlags: 0
@@ -12515,7 +12589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1571331176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16831,6 +16905,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 212388489}
   - {fileID: 1575033018}
   - {fileID: 1581463608}
   - {fileID: 2124756468}
