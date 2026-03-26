@@ -169,6 +169,11 @@ public class ReportManager : MonoBehaviour
         }
         else if (GameManager.Instance.currentChapter == 24)
         {
+            GameManager.Instance.currentChapter = 25;
+            SceneManager.LoadScene("Chapter 25");
+        }
+        else if (GameManager.Instance.currentChapter == 25)
+        {
             SceneManager.LoadScene("ToBeContinued");   // your “to be continued” screen
         }
     }
