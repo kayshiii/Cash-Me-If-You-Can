@@ -58,6 +58,8 @@ public class SpendingScreenManager : MonoBehaviour
     public Chapter11Manager chapter11Manager;
     public Chapter12Manager chapter12Manager;
     public Chapter13Manager chapter13Manager;
+    public Chapter14Manager chapter14Manager;
+    public Chapter15Manager chapter15Manager;
 
 
     void Start()
@@ -259,6 +261,14 @@ public class SpendingScreenManager : MonoBehaviour
         else if (GameManager.Instance.currentChapter == 13)
         {
             chapter13Manager.ProceedAfterBudget13();
+        }
+        else if (GameManager.Instance.currentChapter == 14)
+        {
+            chapter14Manager.ProceedAfterBudget14();
+        }
+        else if (GameManager.Instance.currentChapter == 15)
+        {
+            chapter15Manager.ProceedAfterBudget15();
         }
         // Add more chapters as needed
 
