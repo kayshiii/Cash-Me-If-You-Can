@@ -459,13 +459,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The final bell rings, and the air feels lighter. Alex walks through the
-    hallway one last time, the walls covered with faded posters and end\u2011of\u2011term
-    laughter. Her bag is heavier with papers but lighter with relief.\r\n\r\nSo much
-    has changed since she first stepped on campus \u2014 the fears, the doubts, the
-    long nights. Now, it feels like she\u2019s finally found her rhythm.\r\n\r\nAs
-    the sun dips low, Alex smiles to herself. One more year to go. The finish line\u2019s
-    in sight \u2014 but for now, she\u2019ll just let this moment sink in"
+  m_text: "The world tilts again as Alex steadies herself against the wall. Her phone
+    buzzes with project reminders, but her heartbeat drowns them out. She hesitates
+    \u2014 maybe it\u2019s nothing\u2026 or maybe it\u2019s time to take this seriously\n\nEither
+    way, Alex learns the kind of lesson adulthood always whispers: not everything
+    can wait \u2014 especially you"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -2521,7 +2519,7 @@ GameObject:
   - component: {fileID: 290064263}
   - component: {fileID: 290064262}
   m_Layer: 5
-  m_Name: Decline Button
+  m_Name: Pass Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2605,9 +2603,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter17Manager, Assembly-CSharp
-        m_MethodName: OnRandomEventChoiceDecline
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter20Manager, Assembly-CSharp
+        m_MethodName: OnRandomEventChoicePass
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2935,7 +2933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DECLINE
+  m_text: LET IT PASS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -3624,11 +3622,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your family is now in a pinch especially on money.
-
-
-    What will you
-    do?'
+  m_text: You are experiencing a severe headache after staying up late. What should
+    you do now?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -4119,7 +4114,7 @@ GameObject:
   - component: {fileID: 505323015}
   - component: {fileID: 505323014}
   m_Layer: 5
-  m_Name: Send Button
+  m_Name: Visit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4203,9 +4198,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Chapter17Manager, Assembly-CSharp
-        m_MethodName: OnRandomEventChoiceSend
+      - m_Target: {fileID: 730995294}
+        m_TargetAssemblyTypeName: Chapter20Manager, Assembly-CSharp
+        m_MethodName: OnRandomEventChoiceVisit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5745,7 +5740,7 @@ GameObject:
   - component: {fileID: 730995293}
   - component: {fileID: 730995294}
   m_Layer: 0
-  m_Name: Chapter 19 Manager
+  m_Name: Chapter 20 Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5775,7 +5770,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 730995291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0a6bb3cdeb68e468bc1840cdb50d19, type: 3}
+  m_Script: {fileID: 11500000, guid: 80be6566c327e7d4ab7ff27a7f210fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleGroup: {fileID: 2124756469}
@@ -5785,26 +5780,33 @@ MonoBehaviour:
   dialoguePanel: {fileID: 251754735}
   budgetPanel: {fileID: 573991430}
   cutsceneIntroPanel: {fileID: 1245147077}
-  cutsceneEndPanel: {fileID: 254238414}
+  cutsceneAfterEventPanel: {fileID: 254238414}
   reportPanel: {fileID: 1766758103}
+  randomEventPanel: {fileID: 1963076208}
+  randomEventText: {fileID: 385449470}
+  randomEventMessage: You are experiencing a severe headache after staying up late.
+    What should you do now?
+  randomEventButtons: {fileID: 858835343}
   cutsceneNextButton: {fileID: 0}
   dialogueManager: {fileID: 761087731}
   statsUIUpdater: {fileID: 1214783317}
   budgetPanelManager: {fileID: 196063083}
-  chapter19IntroLines:
+  chapter20IntroLines:
   - speaker: alex
-    text: "Thesis na\u2026"
+    text: "Nahihilo na ako\u2026"
   - speaker: alex
-    text: Parang dito na nauubos ang oras at pera
-  - speaker: boyet
-    text: At sanity
-  - speaker: alex
-    text: Totoo
+    text: Parang napabayaan ko sarili ko
   - speaker: popup
     text: Allowance Received
-  chapter19MidLines:
-  - speaker: lola mom
-    text: Focus na focus tayo ngayon, Alex.
+  chapter20MidLines:
+  - speaker: boyet
+    text: Alex!!! Okay ka lang ba??
+  - speaker: boyet
+    text: Ilang oras ka na bang gising?
+  - speaker: alex
+    text: "Mga\u2026 30 hours"
+  - speaker: boyet
+    text: Alex, hindi na yan healthy
 --- !u!1 &747445684
 GameObject:
   m_ObjectHideFlags: 0
@@ -6872,7 +6874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &858835344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8442,7 +8444,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730995294}
-        m_TargetAssemblyTypeName: Chapter19Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Chapter20Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -9255,14 +9257,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The room is a maze of papers, notebooks, and half\u2011empty coffee cups.
-    Alex sits in the middle of it all, laptop open, eyes focused yet tired. The quiet
-    hum of the fan mixes with the frantic clicking of keys. Around her, drafts and
-    rejected ideas litter the floor \u2014 proof of every late night spent chasing
-    perfection.\r\n\r\nIt\u2019s overwhelming, but this time feels different. She\u2019s
-    not just working for a grade anymore \u2014 it\u2019s about proving everything
-    she\u2019s learned, everything she\u2019s become. Each paragraph is a step closer
-    to the finish line"
+  m_text: "Alex blinks hard at her screen, the words starting to swim. A wave of
+    dizziness hits, gentle at first, then stronger. She grips the edge of the desk,
+    taking a slow breath. Maybe it\u2019s the skipped meal\u2026 or the sleepless
+    nights piling up.\r\n\r\nThe room steadies again, but the message is clear \u2014
+    even determination has limits. She leans back, eyes closed for a moment, promising
+    herself to slow down\u2026 if only for a bit"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -9811,7 +9811,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730995294}
-        m_TargetAssemblyTypeName: Chapter19Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Chapter20Manager, Assembly-CSharp
         m_MethodName: OnCutsceneNextButton
         m_Mode: 1
         m_Arguments:
@@ -10527,7 +10527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 244, y: -150.82}
+  m_AnchoredPosition: {x: 16, y: -150.82}
   m_SizeDelta: {x: 1617.7, y: 206.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317903394
@@ -10550,7 +10550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level 19: Thesis Era'
+  m_text: 'Level 20:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -11019,7 +11019,8 @@ MonoBehaviour:
   chapter16Manager: {fileID: 0}
   chapter17Manager: {fileID: 0}
   chapter18Manager: {fileID: 0}
-  chapter19Manager: {fileID: 730995294}
+  chapter19Manager: {fileID: 0}
+  chapter20Manager: {fileID: 730995294}
 --- !u!1 &1346065931
 GameObject:
   m_ObjectHideFlags: 0
@@ -12956,7 +12957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1571331176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12973,7 +12974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 301.27295, y: -148}
+  m_AnchoredPosition: {x: 301.27295, y: -143}
   m_SizeDelta: {x: 1126.007, y: 206.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571331177
@@ -12996,7 +12997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Networking Opportunity
+  m_text: '"All-Nighter" Health Scare'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -13023,8 +13024,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96.18
-  m_fontSizeBase: 96.18
+  m_fontSize: 92.1
+  m_fontSizeBase: 92.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13357,7 +13358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SEND P8,000
+  m_text: VISIT THE HOSPITAL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
   m_sharedMaterial: {fileID: -5554926264045070331, guid: a59a0f8ad3bfed0479a0aea54232ae2e, type: 2}
@@ -15193,7 +15194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Padala
+  m_text: Health check
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
   m_sharedMaterial: {fileID: -1582481626441873841, guid: 75a7dcceb17caec49b06beab28e14a39, type: 2}
@@ -15657,7 +15658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: For my family...
+  m_text: Everything is fine
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
   m_sharedMaterial: {fileID: 1872093117317676585, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
@@ -15793,7 +15794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: It sure is a big amount of money to give...
+  m_text: Might cost a lot, but will help me
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
   m_sharedMaterial: {fileID: 1872093117317676585, guid: d829ba4d0e53cca41a41f3bff8bb924f, type: 2}
