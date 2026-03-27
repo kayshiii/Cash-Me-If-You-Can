@@ -3681,6 +3681,8 @@ MonoBehaviour:
   previousLevelRemainingCash: 0
   dailyNeedsSpent: 0
   chosenResidence: 0
+  currentEnding: 0
+  iponGoal: 80000
 --- !u!4 &457017615
 Transform:
   m_ObjectHideFlags: 0
@@ -10766,7 +10768,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa39a24d71aa0004bbd19baa15e08e56, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aade9a6dda0a9134496a555f71ab01fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10800,8 +10802,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 292, y: -76}
-  m_SizeDelta: {x: 1200.9, y: 1812.995}
+  m_AnchoredPosition: {x: 329, y: -96}
+  m_SizeDelta: {x: 2353.8215, y: 2245.581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1355355408
 GameObject:
