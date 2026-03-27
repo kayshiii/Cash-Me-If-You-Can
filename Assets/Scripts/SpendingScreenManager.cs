@@ -138,7 +138,7 @@ public class SpendingScreenManager : MonoBehaviour
                 cart.Add(item);
                 cartTotal += item.cost;
                 itemSelected[item] = true;
-                btn.image.color = Color.gray;
+                btn.image.color = Color.green;
             }
             else
             {
