@@ -135,7 +135,7 @@ public class Chapter7Manager : MonoBehaviour
     public void OnRandomEventChoiceJoin()
     {
         // Example: Join event, spend money, more social/happiness
-        GameManager.Instance.AddBudget(-1500);
+        GameManager.Instance.AddIpon(-3500);
         GameManager.Instance.AddHappiness(10);
         GameManager.Instance.AddSocial(10);
         CloseRandomEventAndContinue();

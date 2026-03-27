@@ -133,7 +133,7 @@ public class Chapter10Manager : MonoBehaviour
     // === Random event choices (examples; tweak values/stat changes) ===
     public void OnRandomEventChoiceGo()
     {
-        GameManager.Instance.AddBudget(-500);
+        GameManager.Instance.AddIpon(-500);
         GameManager.Instance.AddHappiness(15);
         GameManager.Instance.AddSocial(10);
         CloseRandomEventAndContinue();

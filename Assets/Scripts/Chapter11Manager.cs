@@ -134,7 +134,7 @@ public class Chapter11Manager : MonoBehaviour
     // === Random event choices (examples; tweak stats as needed) ===
     public void OnRandomEventChoiceEnroll()
     {
-        GameManager.Instance.AddBudget(-1500);
+        GameManager.Instance.AddIpon(-1500);
         GameManager.Instance.AddHappiness(5);
         GameManager.Instance.AddFocus(15);
         CloseRandomEventAndContinue();

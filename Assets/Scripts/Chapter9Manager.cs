@@ -137,7 +137,7 @@ public class Chapter9Manager : MonoBehaviour
     public void OnRandomEventChoiceCheap()
     {
         // Example: react one way
-        GameManager.Instance.AddBudget(-500);
+        GameManager.Instance.AddIpon(-500);
         GameManager.Instance.AddFocus(10);
         GameManager.Instance.AddHappiness(5);
         CloseRandomEventAndContinue();
@@ -146,7 +146,7 @@ public class Chapter9Manager : MonoBehaviour
     public void OnRandomEventChoiceQuality()
     {
         // Example: react another way
-        GameManager.Instance.AddBudget(-1500);
+        GameManager.Instance.AddIpon(-5500);
         GameManager.Instance.AddFocus(10);
         GameManager.Instance.AddHappiness(10);
         CloseRandomEventAndContinue();

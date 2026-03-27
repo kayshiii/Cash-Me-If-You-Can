@@ -762,7 +762,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.126
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4370,19 +4370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b5d812bc9b436439bc677ae4476b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - audioType: 0
-    name: SimplePressButton
-    clips:
-    - {fileID: 8300000, guid: def1d74f55813e5489a5d83df378fcd6, type: 3}
-    volume: 0.45
-    pitch: 1
-    loop: 0
-    replayWhenCalled: 1
-    source: {fileID: 0}
-  OnChangeAudioValue:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &483927237
 Transform:
   m_ObjectHideFlags: 0

@@ -3798,7 +3798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1053163549}
-  buttonClickClip: {fileID: 8300000, guid: a31d4e51e2a28114f86e112c42360c29, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: 600c1de18cfebe74c81a7b675951d474, type: 3}
 --- !u!4 &398582541
 Transform:
   m_ObjectHideFlags: 0
