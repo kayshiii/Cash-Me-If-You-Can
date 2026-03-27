@@ -14,6 +14,7 @@ public class BudgetPanelManager : MonoBehaviour
     public GameObject budgetPanel;
     public GameObject spendingPanel;
     public GameObject negativeBudgetWarningPanel;
+    public TextMeshProUGUI warningText;
 
     private bool dailyNeedsUsed = false;
 
@@ -27,6 +28,7 @@ public class BudgetPanelManager : MonoBehaviour
         iponSlider.maxValue = startingBudget;
         dailyNeedsSlider.maxValue = startingBudget;
         lakwatsaSlider.maxValue = startingBudget;
+        if (warningText != null) warningText.text = "";
 
         UpdateAllDisplays();
     }
@@ -45,6 +47,8 @@ public class BudgetPanelManager : MonoBehaviour
         lakwatsaSlider.value = 0;
         dailyNeedsSlider.value = 0;
         dailyNeedsUsed = false;
+
+        if (warningText != null) warningText.text = "";
         UpdateAllDisplays();
     }
 
@@ -166,7 +170,23 @@ public class BudgetPanelManager : MonoBehaviour
             // Show warning
             if (negativeBudgetWarningPanel != null)
                 negativeBudgetWarningPanel.SetActive(true);
+
+            if (warningText != null)
+                warningText.text = "Attempted to confirm budget with negative cash remaining.";
+
             Debug.LogWarning("Attempted to confirm budget with negative cash remaining.");
+            return; // Do not proceed
+        }
+        if (!dailyNeedsUsed || dailyNeeds <= 0)
+        {
+            // Show warning
+            if (negativeBudgetWarningPanel != null)
+                negativeBudgetWarningPanel.SetActive(true);
+
+            if (warningText != null)
+                warningText.text = "You can't leave your daily needs empty.";
+
+            Debug.LogWarning("You can't leave your daily needs empty.");
             return; // Do not proceed
         }
 

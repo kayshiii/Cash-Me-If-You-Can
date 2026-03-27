@@ -901,8 +901,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a31d4e51e2a28114f86e112c42360c29, type: 3}
-  m_Resource: {fileID: 8300000, guid: a31d4e51e2a28114f86e112c42360c29, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 600c1de18cfebe74c81a7b675951d474, type: 3}
+  m_Resource: {fileID: 8300000, guid: 600c1de18cfebe74c81a7b675951d474, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.08
   m_Pitch: 1
@@ -1740,6 +1740,7 @@ MonoBehaviour:
   budgetPanel: {fileID: 573991430}
   spendingPanel: {fileID: 1336036068}
   negativeBudgetWarningPanel: {fileID: 1272403328}
+  warningText: {fileID: 575032764}
 --- !u!4 &196063084
 Transform:
   m_ObjectHideFlags: 0
@@ -11996,7 +11997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 127917591}
-  buttonClickClip: {fileID: 8300000, guid: a31d4e51e2a28114f86e112c42360c29, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: 600c1de18cfebe74c81a7b675951d474, type: 3}
 --- !u!4 &1486700664
 Transform:
   m_ObjectHideFlags: 0
