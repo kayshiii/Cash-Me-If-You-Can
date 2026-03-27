@@ -176,7 +176,7 @@ public class DialogueManager : MonoBehaviour
                 textBubText.gameObject.SetActive(false);
                 textBub.SetActive(false);
 
-                popUpText.text = dialogueSequence[i].text;
+                popUp1Text.text = dialogueSequence[i].text;
                 //popUpText.text = "";
 
                 yield return new WaitForSeconds(popupDuration);
