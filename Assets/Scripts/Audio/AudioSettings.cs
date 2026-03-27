@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,11 +6,15 @@ public class AudioSettings : MonoBehaviour
 {
     [Header("Audio Sources")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource[] sfxSources;   // <- multiple SFX
+    [SerializeField] private AudioSource[] sfxSources;
 
     [Header("Sliders")]
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
+
+    [Header("Texts")]
+    [SerializeField] private TextMeshProUGUI musicPercentText;
+    [SerializeField] private TextMeshProUGUI sfxPercentText;
 
     private const string MusicKey = "MusicVolume";
     private const string SfxKey = "SfxVolume";
@@ -23,20 +28,15 @@ public class AudioSettings : MonoBehaviour
         if (sfxSlider != null) sfxSlider.value = savedSfx;
 
         if (musicSource != null) musicSource.volume = savedMusic;
-        SetSfxVolume(savedSfx);  // apply to all SFX [web:66]
+        SetSfxVolume(savedSfx);
 
         if (musicSlider != null)
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
         if (sfxSlider != null)
             sfxSlider.onValueChanged.AddListener(SetSfxVolume);
-    }
 
-    private void OnDestroy()
-    {
-        if (musicSlider != null)
-            musicSlider.onValueChanged.RemoveListener(SetMusicVolume);
-        if (sfxSlider != null)
-            sfxSlider.onValueChanged.RemoveListener(SetSfxVolume);
+        UpdateMusicText(savedMusic);
+        UpdateSfxText(savedSfx);
     }
 
     public void SetMusicVolume(float value)
@@ -45,20 +45,31 @@ public class AudioSettings : MonoBehaviour
             musicSource.volume = value;
 
         PlayerPrefs.SetFloat(MusicKey, value);
+        UpdateMusicText(value);
     }
 
     public void SetSfxVolume(float value)
     {
-        // Apply to all SFX AudioSources
         if (sfxSources != null)
         {
             for (int i = 0; i < sfxSources.Length; i++)
-            {
                 if (sfxSources[i] != null)
                     sfxSources[i].volume = value;
-            }
         }
 
         PlayerPrefs.SetFloat(SfxKey, value);
+        UpdateSfxText(value);
+    }
+
+    private void UpdateMusicText(float value)
+    {
+        if (musicPercentText != null)
+            musicPercentText.text = Mathf.RoundToInt(value * 100f).ToString() + "%";
+    }
+
+    private void UpdateSfxText(float value)
+    {
+        if (sfxPercentText != null)
+            sfxPercentText.text = Mathf.RoundToInt(value * 100f).ToString() + "%";
     }
 }
